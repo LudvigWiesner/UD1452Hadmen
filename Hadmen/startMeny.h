@@ -12,8 +12,9 @@ private:
 
 	void moveUp();
 	void moveDown();
+
 public:
-	StartMeny();
+	StartMeny(float windowWidth, float windowHeight);
 	virtual ~StartMeny();
 
 	virtual State update() override;

@@ -3,28 +3,24 @@
 
 void StartMeny::moveUp()
 {
-
-	if (this->selected >= 0)
+	if (this->selected > 0)
 	{
-
 		this->alternatives[selected].setFillColor(sf::Color::Yellow);
-		this->selected -= 1;
+		this->selected--;
 		this->alternatives[selected].setFillColor(sf::Color::Red);
 	}
 }
-
 void StartMeny::moveDown()
 {
-
-	if (this->selected <= 1)
+	if (this->selected < 1)
 	{
 		this->alternatives[selected].setFillColor(sf::Color::Yellow);
-		this->selected += 1;
+		this->selected++;
 		this->alternatives[selected].setFillColor(sf::Color::Red);
 	}
 }
 
-StartMeny::StartMeny() : GameState("StartMeny")
+StartMeny::StartMeny(float windowWidth, float windowHeight) : GameState("StartMeny", windowWidth, windowHeight)
 {
 	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
 	alternatives[0].setFont(font);
@@ -93,11 +89,11 @@ void StartMeny::handleEvents()
 			{
 				this->moveUp();
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
 				this->moveDown();
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 			{
 				this->done = true;
 			}

@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "GameOver.h"
 #include "startMeny.h"
-#include <iostream>
 
 #ifdef _DEBUG
 #pragma comment(lib, "sfml-window-d.lib")
@@ -19,8 +18,10 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	GameState* current = nullptr;
 	State currentState = State::NO_CHANGE;
+	float windowWidth = 900.0f;
+	float windowHeight = 600.0f;
 
-	current = new StartMeny();
+	current = new StartMeny(windowWidth, windowHeight);
 	currentState = State::MENU;
 
 	while (currentState != State::EXIT)
@@ -35,15 +36,15 @@ int main()
 			{
 			case State::MENU:
 				delete current;
-				current = new StartMeny();
+				current = new StartMeny(windowWidth, windowHeight);
 				break;
 			case State::PLAY:
 				delete current;
-				current = new Game();
+				current = new Game(windowWidth, windowHeight);
 				break;
 			case State::GAME_OVER:
 				delete current;
-				current = new GameOver();
+				current = new GameOver(windowWidth, windowHeight);
 				break;
 			}
 		}

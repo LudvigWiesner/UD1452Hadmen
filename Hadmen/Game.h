@@ -5,18 +5,17 @@
 
 class Game : public GameState
 {
-public:
-	static const int HEIGHT = 600;
-	static const int WIDTH = 900;
 private:
 	sf::Clock clock;
 	sf::Time elapsedTimeSinceLastUpdate;
 	sf::Time timePerFrame;
 
-	sf::Image baseImage;
-	TileMap* tileMap;
+	//sf::Image baseImage;
+	//TileMap* tileMap;
+
+	sf::CircleShape circle;
 public:
-	Game();
+	Game(float windowWidth, float windowHeight);
 	virtual ~Game();
 
 	// Inherited via GameState

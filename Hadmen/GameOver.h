@@ -4,17 +4,15 @@
 
 class GameOver : public GameState
 {
-public:
-	static const int HEIGHT = 600;
-	static const int WIDTH = 900;
 private:
-
-
+	sf::Text labelText; 
+	sf::Text text; 
+	sf::Font font;
+	std::string name; 
+	bool done;
 public:
-	GameOver();
+	GameOver(float windowWidth, float windowHeight);
 	virtual ~GameOver();
-	void run();
-
 
 	// Inherited via GameState
 	virtual State update() override;

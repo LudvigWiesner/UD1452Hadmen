@@ -10,10 +10,9 @@ private:
 	sf::Time elapsedTimeSinceLastUpdate;
 	sf::Time timePerFrame;
 
-	//sf::Image baseImage;
-	//TileMap* tileMap;
+	sf::Image baseImage;
+	TileMap* tileMap;
 
-	sf::CircleShape circle;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

@@ -10,8 +10,10 @@ private:
 	sf::Time elapsedTimeSinceLastUpdate;
 	sf::Time timePerFrame;
 
-	//sf::Image baseImage;
-	//TileMap* tileMap;
+	sf::Image baseImage;
+	sf::View* camera;
+
+	TileMap* tileMap;
 
 	sf::CircleShape circle;
 public:

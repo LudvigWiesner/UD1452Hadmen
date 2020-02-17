@@ -1,41 +1,25 @@
 #include "startMeny.h"
 #include <iostream>
 
-void StartMeny::moveUp()
-{
-	if (this->selected > 0)
-	{
-		this->alternatives[selected].setFillColor(sf::Color::Yellow);
-		this->selected--;
-		this->alternatives[selected].setFillColor(sf::Color::Red);
-	}
-}
-void StartMeny::moveDown()
-{
-	if (this->selected < 1)
-	{
-		this->alternatives[selected].setFillColor(sf::Color::Yellow);
-		this->selected++;
-		this->alternatives[selected].setFillColor(sf::Color::Red);
-	}
-}
-
 StartMeny::StartMeny(float windowWidth, float windowHeight) : GameState("StartMeny", windowWidth, windowHeight)
 {
-	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
+	font.loadFromFile("../images/TrenchThin-aZ1J.ttf");
 	alternatives[0].setFont(font);
 	alternatives[0].setFillColor(sf::Color::Red);
-	alternatives[0].setCharacterSize(30);
+	alternatives[0].setCharacterSize(60);
 	alternatives[0].setString("Play");
-	alternatives[0].setPosition(200.f, 200.f);
+	alternatives[0].setPosition(windowWidth / 2 - alternatives[0].getGlobalBounds().width / 2, windowHeight / 2 - 150);
 
 	alternatives[1].setFont(font);
 	alternatives[1].setFillColor(sf::Color::Yellow);
-	alternatives[1].setCharacterSize(30);
+	alternatives[1].setCharacterSize(60);
 	alternatives[1].setString("Exit");
-	alternatives[1].setPosition(200.f, 350.f);
+	alternatives[1].setPosition(windowWidth / 2 - alternatives[1].getGlobalBounds().width / 2, windowHeight / 2);
 
+	backgroundTexture.loadFromFile("../Images/backgroundImage.jpg");
+	backgroundImage.setTexture(backgroundTexture);
 
+	backgroundImage.setScale(windowWidth / backgroundImage.getLocalBounds().width, windowHeight / backgroundImage.getLocalBounds().height);
 	selected = 0;
 	done = false;
 }
@@ -46,7 +30,6 @@ StartMeny::~StartMeny()
 
 State StartMeny::update()
 {
-
 	State state = State::NO_CHANGE;
 	if (done)
 	{
@@ -66,6 +49,7 @@ State StartMeny::update()
 void StartMeny::render()
 {
 	window.clear();
+	window.draw(backgroundImage);
 	for (int i = 0; i < 2; i++)
 	{
 		window.draw(alternatives[i]);
@@ -78,25 +62,52 @@ void StartMeny::handleEvents()
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		if (event.type == sf::Event::Closed)
+		switch(event.type)
 		{
+		case sf::Event::Closed:
 			window.close();
-		}
+		break;
 
-		if (event.type == sf::Event::KeyPressed)
+		case sf::Event::MouseMoved:
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+			sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+			if (this->alternatives[0].getGlobalBounds().contains(mousePosF))
 			{
-				this->moveUp();
+				this->alternatives[0].setFillColor(sf::Color::Yellow);
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			else
 			{
-				this->moveDown();
+				this->alternatives[0].setFillColor(sf::Color::Red);
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			if (this->alternatives[1].getGlobalBounds().contains(mousePosF))
 			{
+				this->alternatives[1].setFillColor(sf::Color::Yellow);
+			}
+			else
+			{
+				this->alternatives[1].setFillColor(sf::Color::Red);
+			}
+		}
+		break;
+
+		case sf::Event::MouseButtonPressed:
+		{
+			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+			sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+			if (this->alternatives[0].getGlobalBounds().contains(mousePosF))
+			{
+				this->selected = 0;
 				this->done = true;
 			}
+			else if(this->alternatives[1].getGlobalBounds().contains(mousePosF))
+			{
+				this->selected = 1;
+				this->done = true;
+			}
+		}
+		break;
+			
 		}
 	}
 }

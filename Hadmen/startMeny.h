@@ -7,11 +7,11 @@ private:
 	sf::Text alternatives[2];
 	sf::Font font;
 
+	sf::Texture backgroundTexture;
+	sf::Sprite backgroundImage;
+
 	int selected;
 	bool done;
-
-	void moveUp();
-	void moveDown();
 
 public:
 	StartMeny(float windowWidth, float windowHeight);

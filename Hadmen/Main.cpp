@@ -18,8 +18,8 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	GameState* current = nullptr;
 	State currentState = State::NO_CHANGE;
-	float windowWidth = 900.0f;
-	float windowHeight = 600.0f;
+	float windowWidth = 1920.0f;
+	float windowHeight = 1080.0f;
 
 	current = new StartMeny(windowWidth, windowHeight);
 	currentState = State::MENU;

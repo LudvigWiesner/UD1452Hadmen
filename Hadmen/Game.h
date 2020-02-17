@@ -11,8 +11,11 @@ private:
 	sf::Time timePerFrame;
 
 	sf::Image baseImage;
+	sf::View* camera;
+
 	TileMap* tileMap;
 
+	sf::CircleShape circle;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

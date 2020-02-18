@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Tile &amp; Tilemap">
       <UniqueIdentifier>{d23ade34-26ea-4408-9882-885022e6584d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameStates">
+      <UniqueIdentifier>{93b97156-2044-47ae-996b-520b302de7fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoalTile.cpp">
@@ -36,12 +39,6 @@
     <ClCompile Include="TileEntity.cpp">
       <Filter>Source Files\Tile &amp; Tilemap</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\List</Filter>
-    </ClCompile>
-    <ClCompile Include="MainListTest.cpp">
-      <Filter>Source Files\List</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceTile.cpp">
       <Filter>Source Files\Resources</Filter>
     </ClCompile>
@@ -55,18 +52,24 @@
       <Filter>Source Files\Tile &amp; Tilemap</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="startMeny.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Clickable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Reshandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,9 +95,6 @@
     <ClInclude Include="Node.h">
       <Filter>Source Files\List</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Source Files\List</Filter>
-    </ClInclude>
     <ClInclude Include="StoneTile.h">
       <Filter>Source Files\Resources</Filter>
     </ClInclude>
@@ -105,18 +105,24 @@
       <Filter>Source Files\Tile &amp; Tilemap</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="GameOver.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="startMeny.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="State.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Clickable.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reshandler.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

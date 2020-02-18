@@ -14,13 +14,9 @@ private:
 	//TileEntity* arrCharacterObj[TILEMAPSIZE][TILEMAPSIZE];
 
 public:
-	TileMap(sf::Image &tileRef);
+	TileMap(sf::Image &tileRef, ResHandler* resourceHandler);
 	virtual ~TileMap();
 
 	void renderTileMap(sf::RenderWindow &targetWindow);
-
-
-
-
 
 };

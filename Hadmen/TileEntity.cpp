@@ -4,35 +4,17 @@ TileEntity::TileEntity()
 {
 	this->tileTexture.loadFromFile("../Images/floor01.png");
 	this->tileSprite.setTexture(tileTexture);
-	//this->collision = true;
 }
 
-TileEntity::TileEntity(const std::string filename)
+TileEntity::TileEntity(const int index, ResHandler *resourceHandler)
 {
-	this->tileTexture.loadFromFile("../Images/" + filename);
+	this->tileTexture = resourceHandler->getTexture(index);
 	this->tileSprite.setTexture(tileTexture);
-	//this->collision = false;
-
-	//if (filename == "wall01.png")
-	//{
-	//	this->collision = true;
-	//}
-
 }
 
 TileEntity::~TileEntity()
 {
 }
-
-//bool TileEntity::collision()
-//{
-//	return this->collision;
-//}
-//
-//void TileEntity::setCollision(bool state)
-//{
-//	this->collision = state;
-//}
 
 void TileEntity::setCoordinates(float xPos,float yPos)
 {

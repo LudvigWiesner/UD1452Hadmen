@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
+#include "Reshandler.h"
 
 class Game : public GameState
 {
@@ -14,7 +15,7 @@ private:
 	sf::View* camera;
 
 	TileMap* tileMap;
-
+	ResHandler resourceHandler;
 	sf::CircleShape circle;
 public:
 	Game(float windowWidth, float windowHeight);

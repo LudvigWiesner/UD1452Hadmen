@@ -3,7 +3,7 @@
 Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidth, windowHeight)
 {
 	this->baseImage.loadFromFile("../Images/BaseImage.png");
-	this->tileMap = new TileMap(this->baseImage);
+	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	elapsedTimeSinceLastUpdate = sf::Time::Zero;
 	timePerFrame = sf::seconds(1 / 60.f);
 

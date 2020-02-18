@@ -1,6 +1,6 @@
 #include "TileMap.h"
 
-TileMap::TileMap(sf::Image &tileRef)
+TileMap::TileMap(sf::Image &tileRef, ResHandler *resourceHandler)
 {
 	arrBackgrounds = new TileEntity ** [TILEMAPSIZE];
 	for (int i = 0; i < TILEMAPSIZE; i++)
@@ -15,16 +15,16 @@ TileMap::TileMap(sf::Image &tileRef)
 		{
 			if (this->mapRef.getPixel(X, Y) == sf::Color::Color(55, 193, 25))
 			{
-				TileEntity * wall = new TileEntity("wall01.png");
-				wall->setCoordinates(X * 50.0f, Y * 50.0f);
-				arrBackgrounds[X][Y] = wall;
+				TileEntity * tile = new TileEntity(7, resourceHandler);
+				tile->setCoordinates(X * 50.0f, Y * 50.0f);
+				arrBackgrounds[X][Y] = tile;
 				
 			}
 			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(0, 0, 0))
 			{
-				TileEntity* wall = new TileEntity("floor01.png");
-				wall->setCoordinates(X * 50.0f, Y * 50.0f);
-				arrBackgrounds[X][Y] = wall;
+				TileEntity* tile = new TileEntity(4, resourceHandler);
+				tile->setCoordinates(X * 50.0f, Y * 50.0f);
+				arrBackgrounds[X][Y] = tile;
 			}
 		}
 	}
@@ -47,9 +47,8 @@ TileMap::~TileMap()
 	}
 
 	for (int i = 0; i < TILEMAPSIZE; i++)
-	{
-		
-		delete arrBackgrounds[i];
+	{	
+		delete[]arrBackgrounds[i];
 	}
 	delete[] arrBackgrounds;
 	

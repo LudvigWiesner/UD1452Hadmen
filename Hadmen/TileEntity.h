@@ -7,7 +7,7 @@ private:
 	bool collision;
 public:
 	TileEntity();
-	TileEntity(const int index, ResHandler *resourceHandler);
+	TileEntity(const int index, ResHandler *resourceHandler,float x,float y);
 
 	void setCollision(const bool collision);
 };

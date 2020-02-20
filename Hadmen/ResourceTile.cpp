@@ -1,6 +1,6 @@
 #include "ResourceTile.h"
 
-ResourceTile::ResourceTile(const int index, ResHandler* resourceHandler, std::string name) : TileEntity(index, resourceHandler)
+ResourceTile::ResourceTile(const int index, ResHandler* resourceHandler, std::string name,int x,int y) : TileEntity(index, resourceHandler,x,y)
 {
 	this->name = name;
 }

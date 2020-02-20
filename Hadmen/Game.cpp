@@ -3,9 +3,9 @@
 Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidth, windowHeight)
 {
 	this->baseImage.loadFromFile("../Images/BaseImage.png");
-	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	elapsedTimeSinceLastUpdate = sf::Time::Zero;
 	timePerFrame = sf::seconds(1 / 60.f);
+	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	camera = new sf::View(sf::Vector2f(windowWidth/2, windowHeight/2),sf::Vector2f(windowWidth,windowHeight));
 	this->PC = new PlayerCharacter(15, &this->resourceHandler, 4, 4);
 }
@@ -13,12 +13,14 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 Game::~Game()
 {
 	delete this->tileMap;
+	delete this->PC;
+	delete this->camera;
 }
 
 State Game::update()
 {
+	State state = State::NO_CHANGE;
 	elapsedTimeSinceLastUpdate += clock.restart();
-
 	while (elapsedTimeSinceLastUpdate > timePerFrame)
 	{
 		elapsedTimeSinceLastUpdate -= timePerFrame;
@@ -45,11 +47,14 @@ State Game::update()
 		}
 		if (this->PC->isSelected())
 		{
-			this->PC->moveCharacterTo(this->mouseClickPosition);
+			this->PC->moveEntityTo(this->mouseClickPosition);
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			state = State::EXIT;
+		}
+		
 	}
-
-	State state = State::NO_CHANGE;
 	return state;
 }
 
@@ -57,8 +62,8 @@ void Game::render()
 {
 	window.clear();
 	this->tileMap->renderTileMap(this->window);
-	window.draw(*this->PC);
 	window.setView(*camera);
+	window.draw(*this->PC);
 	window.display();
 }
 

@@ -5,7 +5,7 @@ TileEntity::TileEntity() : Clickable()
 	this->collision = false;
 }
 
-TileEntity::TileEntity(const int index, ResHandler *resourceHandler) : Clickable(index, resourceHandler)
+TileEntity::TileEntity(const int index, ResHandler *resourceHandler, float x, float y) : Clickable(index, resourceHandler,x,y)
 {
 	this->collision = false;
 }

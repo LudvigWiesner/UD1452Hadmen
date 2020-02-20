@@ -1,2 +1,2 @@
 #pragma once
-enum class MoveDirections { DOWN, LEFT, RIGHT, UP};
+enum class MoveDirections { DOWN, LEFT, RIGHT, UP };

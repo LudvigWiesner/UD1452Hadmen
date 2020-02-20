@@ -4,6 +4,7 @@
 #include "TileMap.h"
 #include "Reshandler.h"
 #include "PlayerCharacter.h"
+#include "Weapon.h"
 
 class Game : public GameState
 {

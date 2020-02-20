@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Entity &amp; Characters">
       <UniqueIdentifier>{b7e924cf-f946-4b2b-bdff-244dc5b1da99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Material">
+      <UniqueIdentifier>{ada111b8-2af6-4246-937f-c17a3df7e22f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TileEntity.cpp">
@@ -71,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="PlayerCharacter.cpp">
       <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="PlayerCharacter.h">
       <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Source Files\Material</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

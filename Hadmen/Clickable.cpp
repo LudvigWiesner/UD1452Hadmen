@@ -16,6 +16,16 @@ Clickable::Clickable(const int index, ResHandler* resourceHandler)
 	this->sprite.setTexture(this->texture);
 }
 
+Clickable::Clickable(const int index, ResHandler* resourceHandler, float x, float y)
+{
+	this->m_pressed = false;
+	this->m_mouseHeld = false;
+	this->m_active = false;
+	this->texture = resourceHandler->getTexture(index);
+	this->sprite.setTexture(this->texture);
+	this->sprite.setPosition(x, y);
+}
+
 sf::FloatRect Clickable::getBounds()const
 {
 	return this->sprite.getGlobalBounds();
@@ -65,6 +75,26 @@ bool Clickable::collision(const Clickable &otherObject)const
 void Clickable::setCoordinates(float xPos, float yPos)
 {
 	this->sprite.setPosition(xPos, yPos);
+}
+
+void Clickable::setTextureRect(const sf::IntRect intRect)
+{
+	this->sprite.setTextureRect(intRect);
+}
+
+void Clickable::moveSprite(const int horDir, const int vertDir)
+{
+	this->sprite.move(horDir, vertDir);
+}
+
+sf::Vector2f Clickable::getPosition() const
+{
+	return this->sprite.getPosition();
+}
+
+sf::Vector2u Clickable::getTextureSize() const
+{
+	return this->texture.getSize();
 }
 
 void Clickable::draw(sf::RenderTarget& target, sf::RenderStates states) const

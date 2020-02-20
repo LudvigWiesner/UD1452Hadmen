@@ -2,40 +2,67 @@
 
 Entity::Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int nrOfColumns, float speed) : Clickable(index, resourceHandler)
 {
+	this->horDir = NO;
+	this->vertDir = NO;
 	this->speed = speed;
-	this->intRect = sf::IntRect(0, 0, this->texture.getSize().x / nrOfColumns, this->texture.getSize().y / nrOfRows);
-	this->sprite.setTextureRect(this->intRect);
+	this->intRect = sf::IntRect(0, 0, this->getTextureSize().x / nrOfColumns, this->getTextureSize().y / nrOfRows);
+	this->setTextureRect(this->intRect);
 	this->timeCounter = 0;
 	this->updateTime = 30;
 }
 
-void Entity::move(MoveDirections moveDirection)
+void Entity::moveEntityTo(sf::Vector2i coordinates)
 {
-	if (moveDirection == MoveDirections::DOWN)
+	this->horDir = NO;
+	this->vertDir = NO;
+	if (coordinates.y > this->getPosition().y + this->getBounds().height)
+	{
+		this->vertDir = UP;
+	}
+	else if (coordinates.y < this->getPosition().y + this->getBounds().height)
+	{
+		this->vertDir = DOWN;
+	}
+	if (coordinates.x > this->getPosition().x + this->getBounds().width)
+	{
+		this->horDir = RIGHT;
+	}
+	else if (coordinates.x < this->getPosition().x + this->getBounds().width)
+	{
+		this->horDir = LEFT;
+	}
+
+	this->moveSprite(this->horDir, this->vertDir);
+	this->switchSprite();
+}
+
+void Entity::switchSprite()
+{
+	if (this->vertDir == UP)
 	{
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::DOWN);
-		this->sprite.move(0.0f, this->speed);
 	}
-	else if (moveDirection == MoveDirections::LEFT)
-	{
-		this->intRect.top = this->intRect.height * (int)(MoveDirections::LEFT);
-		this->sprite.move(-this->speed, 0.0f);
-	}
-	else if (moveDirection == MoveDirections::RIGHT)
-	{
-		this->intRect.top = this->intRect.height * (int)(MoveDirections::RIGHT);
-		this->sprite.move(this->speed, 0.0f);
-	}
-	else if (moveDirection == MoveDirections::UP)
+	else if (this->vertDir == DOWN)
 	{
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::UP);
-		this->sprite.move(0.0f, -this->speed);
+	}
+	if (this->horDir == LEFT && vertDir == NO)
+	{
+		this->intRect.top = this->intRect.height * (int)(MoveDirections::LEFT);
+	}
+	else if (this->horDir == RIGHT && vertDir == NO)
+	{
+		this->intRect.top = this->intRect.height * (int)(MoveDirections::RIGHT);
 	}
 
 	this->timeCounter = (this->timeCounter + 1) % this->updateTime;
 	if (this->timeCounter == 0)
 	{
-		this->intRect.left = (this->intRect.left + this->intRect.width) % (int)this->texture.getSize().x;
+		this->intRect.left = (this->intRect.left + this->intRect.width) % (int)this->getTextureSize().x;
 	}
-	this->sprite.setTextureRect(this->intRect);
+	this->setTextureRect(this->intRect);
 }
+
+
+
+

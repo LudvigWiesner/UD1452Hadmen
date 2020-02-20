@@ -22,65 +22,59 @@
     <Filter Include="Source Files\Tile &amp; Tilemap">
       <UniqueIdentifier>{d23ade34-26ea-4408-9882-885022e6584d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameStates">
+      <UniqueIdentifier>{93b97156-2044-47ae-996b-520b302de7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceHandler">
+      <UniqueIdentifier>{214c97ab-82f9-4324-8d18-6323783702d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clickable">
+      <UniqueIdentifier>{634b2528-bb8d-438e-ab5a-acb825118516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity &amp; Characters">
+      <UniqueIdentifier>{b7e924cf-f946-4b2b-bdff-244dc5b1da99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CoalTile.cpp">
-      <Filter>Source Files\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="IronTile.cpp">
-      <Filter>Source Files\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="WaterTile.cpp">
-      <Filter>Source Files\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="TileEntity.cpp">
       <Filter>Source Files\Tile &amp; Tilemap</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\List</Filter>
-    </ClCompile>
-    <ClCompile Include="MainListTest.cpp">
-      <Filter>Source Files\List</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceTile.cpp">
-      <Filter>Source Files\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="StoneTile.cpp">
-      <Filter>Source Files\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="AluminiumTile.cpp">
       <Filter>Source Files\Resources</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>Source Files\Tile &amp; Tilemap</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="startMeny.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Reshandler.cpp">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Clickable.cpp">
+      <Filter>Source Files\Clickable</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CoalTile.h">
-      <Filter>Source Files\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceTile.h">
-      <Filter>Source Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="IronTile.h">
-      <Filter>Source Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="WaterTile.h">
       <Filter>Source Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="TileEntity.h">
@@ -92,32 +86,38 @@
     <ClInclude Include="Node.h">
       <Filter>Source Files\List</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Source Files\List</Filter>
-    </ClInclude>
-    <ClInclude Include="StoneTile.h">
-      <Filter>Source Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="AluminiumTile.h">
-      <Filter>Source Files\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Source Files\Tile &amp; Tilemap</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="GameOver.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="startMeny.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="State.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Reshandler.h">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Clickable.h">
+      <Filter>Source Files\Clickable</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveDirections.h">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

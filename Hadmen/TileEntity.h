@@ -1,21 +1,13 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
-#include "Reshandler.h"
+#include "Clickable.h"
 
-class TileEntity :public sf::Drawable
+class TileEntity : public Clickable
 {
 private:
-	sf::Texture tileTexture;
-	sf::Sprite	tileSprite;
+	bool collision;
 public:
 	TileEntity();
 	TileEntity(const int index, ResHandler *resourceHandler);
-	~TileEntity();
 
-
-	void setCoordinates(float xPos, float yPos);
-	// Inherited via Drawable
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
+	void setCollision(const bool collision);
 };

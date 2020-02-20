@@ -6,11 +6,8 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	elapsedTimeSinceLastUpdate = sf::Time::Zero;
 	timePerFrame = sf::seconds(1 / 60.f);
-
-
-	//camera
 	camera = new sf::View(sf::Vector2f(windowWidth/2, windowHeight/2),sf::Vector2f(windowWidth,windowHeight));
-	
+	this->PC = new PlayerCharacter(15, &this->resourceHandler, 4, 4);
 }
 
 Game::~Game()
@@ -45,9 +42,11 @@ State Game::update()
 			{
 				camera->move(0, -5);
 			}
-
 		}
-		
+		if (this->PC->isSelected())
+		{
+			this->PC->moveCharacterTo(this->mouseClickPosition);
+		}
 	}
 
 	State state = State::NO_CHANGE;
@@ -58,6 +57,7 @@ void Game::render()
 {
 	window.clear();
 	this->tileMap->renderTileMap(this->window);
+	window.draw(*this->PC);
 	window.setView(*camera);
 	window.display();
 }
@@ -70,6 +70,16 @@ void Game::handleEvents()
 		if (event.type == sf::Event::Closed)
 		{
 			window.close();
+		}
+
+		if (this->PC->click(window, event))
+		{
+			this->PC->setSelected(true);
+		}
+		
+		if (event.type == sf::Event::MouseButtonReleased)
+		{
+			this->mouseClickPosition = sf::Mouse::getPosition();
 		}
 	}
 }

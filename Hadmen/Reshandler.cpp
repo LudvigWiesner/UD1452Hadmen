@@ -13,6 +13,12 @@ ResHandler::ResHandler()
 	this->textures[7].loadFromFile("../Images/wall01.png");
 	this->textures[8].loadFromFile("../Images/WaterTexture.jpg");
 	this->textures[9].loadFromFile("../Images/backgroundImage.jpg");
+	this->textures[10].loadFromFile("../Images/LavaTexture.png");
+	this->textures[11].loadFromFile("../Images/ObsidianTexture.png");
+	this->textures[12].loadFromFile("../Images/GravelTexture.png");
+	this->textures[13].loadFromFile("../Images/DirtTexture.png");
+	this->textures[14].loadFromFile("../Images/GrassTexture.png");
+	this->textures[15].loadFromFile("../Images/CharacterSpriteSheet1.png");
 }
 
 ResHandler::~ResHandler()

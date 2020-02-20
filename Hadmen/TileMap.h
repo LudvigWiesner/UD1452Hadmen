@@ -4,7 +4,6 @@
 #include <iostream>
 const int TILEMAPSIZE = 108;
 
-using namespace std;
 class TileMap
 {
 private:

@@ -1,16 +1,17 @@
 #pragma once
 #ifndef RESOURCETILE_H
 #define RESOURCETILE_H
-#include <string>
+#include "TileEntity.h"
 #include <ctime>
 
-class ResourceTile
+class ResourceTile : public TileEntity
 {
 private:
 	std::string name;
 public:
-	ResourceTile(std::string name);
+	ResourceTile(const int index, ResHandler *resourceHandler, std::string name);
 
 	int getResource()const;
+	std::string getName()const;
 };
 #endif // !RESOURCETILE_H

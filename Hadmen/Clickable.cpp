@@ -1,5 +1,12 @@
 #include "Clickable.h"
 
+Clickable::Clickable()
+{
+	this->m_pressed = false;
+	this->m_mouseHeld = false;
+	this->m_active = false;
+}
+
 Clickable::Clickable(const int index, ResHandler* resourceHandler)
 {
 	this->m_pressed = false;
@@ -53,6 +60,11 @@ bool Clickable::click(const sf::RenderWindow& window, const sf::Event& event)
 bool Clickable::collision(const Clickable &otherObject)const
 {
 	return this->sprite.getGlobalBounds().intersects(otherObject.getBounds());
+}
+
+void Clickable::setCoordinates(float xPos, float yPos)
+{
+	this->sprite.setPosition(xPos, yPos);
 }
 
 void Clickable::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -1,5 +1,6 @@
 #pragma once
 #include"GameState.h"
+#include "Music.h"
 
 class StartMeny : public GameState
 {
@@ -9,6 +10,8 @@ private:
 
 	sf::Texture backgroundTexture;
 	sf::Sprite backgroundImage;
+
+	Music music;
 
 	int selected;
 	bool done;

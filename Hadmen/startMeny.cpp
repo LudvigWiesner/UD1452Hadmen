@@ -22,6 +22,10 @@ StartMeny::StartMeny(float windowWidth, float windowHeight) : GameState("StartMe
 	backgroundImage.setScale(windowWidth / backgroundImage.getLocalBounds().width, windowHeight / backgroundImage.getLocalBounds().height);
 	selected = 0;
 	done = false;
+	
+	music.setMusic("backgroundMusicTwo");
+	music.changeVolume(20);
+	music.playMusic();
 }
 
 StartMeny::~StartMeny()
@@ -40,6 +44,7 @@ State StartMeny::update()
 		else if (selected == 1)
 		{
 			state = State::EXIT;
+			music.stopMusic();
 		}
 	}
 

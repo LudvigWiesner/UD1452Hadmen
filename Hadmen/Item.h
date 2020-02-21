@@ -1,16 +1,18 @@
 #pragma once
 #ifndef ITEM_H
 #define ITEM_H
-#include <string>
+#include "Clickable.h"
 
-class Item
+class Item : public Clickable
 {
 private:
 	std::string name;
+	int nrOfItem;
 public:
-	Item();
-	Item(std::string name);
+	Item(const int index, ResHandler* resourceHandler, std::string name);
 
-	std::string getName();
+	int getNrOfItem()const;
+	void removeNrOfItem(const int nrToRemove);
 };
-#endif // !Item
+#endif // !ITEM_H
+#pragma once

@@ -2,6 +2,9 @@
 #include "GameState.h"
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
+#include "Reshandler.h"
+#include "PlayerCharacter.h"
+#include "Weapon.h"
 
 class Game : public GameState
 {
@@ -14,8 +17,11 @@ private:
 	sf::View* camera;
 
 	TileMap* tileMap;
-
+	ResHandler resourceHandler;
 	sf::CircleShape circle;
+
+	PlayerCharacter* PC;
+	sf::Vector2i mouseClickPosition;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

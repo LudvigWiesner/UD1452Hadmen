@@ -1,24 +1,13 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
+#include "Clickable.h"
 
-class TileEntity :public sf::Drawable
+class TileEntity : public Clickable
 {
 private:
-	sf::Texture tileTexture;
-	sf::Sprite	tileSprite;
-	//bool collision;
+	bool collision;
 public:
 	TileEntity();
-	TileEntity(const std::string filename);
-	~TileEntity();
+	TileEntity(const int index, ResHandler *resourceHandler,float x,float y);
 
-	//bool collision();
-	//void setCollision(bool state);
-
-	void setCoordinates(float xPos, float yPos);
-
-	// Inherited via Drawable
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
+	void setCollision(const bool collision);
 };

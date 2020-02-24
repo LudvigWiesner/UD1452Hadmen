@@ -4,7 +4,7 @@
 #include "TileMap.h"
 #include "Reshandler.h"
 #include "PlayerCharacter.h"
-#include "Weapon.h"
+#include "UI.h"
 
 class Game : public GameState
 {
@@ -20,8 +20,12 @@ private:
 	ResHandler resourceHandler;
 	sf::CircleShape circle;
 
-	PlayerCharacter* PC;
+	PlayerCharacter* PCOne;
+	PlayerCharacter* PCTwo;
 	sf::Vector2i mouseClickPosition;
+
+	UI* userInterface;
+
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

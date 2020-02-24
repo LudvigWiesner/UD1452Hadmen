@@ -3,6 +3,7 @@
 #define ENTITY_H
 #include "Clickable.h"
 #include "MoveDirections.h"
+#include <ctime>
 
 class Entity : public Clickable
 {
@@ -22,9 +23,25 @@ private:
 	int vertDir;
 
 	void switchSprite();
+
+	bool alive;
+	int MaxHP;
+	int currentHP;
+	int evasion;
 public:
 	Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int nrOfColumns, float speed = 3.0F);
+	Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int nrOfColumns, int evasion, float speed = 3.0F);
 	void moveEntityTo(sf::Vector2i coordinates);
+
+	void takeDamage(const int damage);
+	void makeAttack(Entity& otherEntity, const int damage);
+
+	void setEvasion(const int evasion);
+	void increaseMaxHP(const int healthToAdd);
+	void healCurrentHP(const int healthToHeal);
+
+	int getMaxHP()const;
+	int getCurrentHP()const;
 	
 };
 #endif // !ENTITY_H

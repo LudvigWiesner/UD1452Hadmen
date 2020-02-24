@@ -16,8 +16,10 @@ private:
 	bool m_active;
 
 	bool isInside(const sf::RenderWindow& window)const;
-	void reset();
+protected:
+	void moveSprite(const int horDir, const int vertDir, float speed);
 public:
+	void reset();
 	Clickable();
 	Clickable(const int index, ResHandler* resourceHandler);
 	Clickable(const int index, ResHandler* resourceHandler, float x, float y);
@@ -27,7 +29,6 @@ public:
 	bool collision(const Clickable &otherObject)const;
 	void setCoordinates(float xPos, float yPos);
 	void setTextureRect(const sf::IntRect intRect);
-	void moveSprite(const int horDir, const int vertDir);
 	sf::Vector2f getPosition()const;
 	sf::Vector2u getTextureSize()const;
 	// Inherited via Drawable

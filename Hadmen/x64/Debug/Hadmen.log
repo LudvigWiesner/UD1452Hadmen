@@ -1,4 +1,8 @@
-﻿  ResourceTile.cpp
-C:\Users\Ludvig\source\repos\Hadmen\Hadmen\ResourceTile.cpp(3,142): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ludvig\source\repos\Hadmen\Hadmen\ResourceTile.cpp(3,140): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Entity.cpp
+  Game.cpp
+  Main.cpp
+  PlayerCharacter.cpp
+  UI.cpp
+  Generating Code...
+C:\Users\Ludvig\source\repos\Hadmen\Hadmen\List.h(168): warning C4715: 'List<Item>::getAt': not all control paths return a value
   Hadmen.vcxproj -> C:\Users\Ludvig\source\repos\Hadmen\x64\Debug\Hadmen.exe

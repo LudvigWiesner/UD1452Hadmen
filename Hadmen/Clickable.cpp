@@ -82,9 +82,9 @@ void Clickable::setTextureRect(const sf::IntRect intRect)
 	this->sprite.setTextureRect(intRect);
 }
 
-void Clickable::moveSprite(const int horDir, const int vertDir)
+void Clickable::moveSprite(const int horDir, const int vertDir, float speed) // Speed need to be added
 {
-	this->sprite.move(horDir, vertDir);
+	this->sprite.move(horDir , vertDir);
 }
 
 sf::Vector2f Clickable::getPosition() const

@@ -1,20 +1,36 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidth, windowHeight)
 {
-	this->baseImage.loadFromFile("../Images/BaseImage.png");
 	elapsedTimeSinceLastUpdate = sf::Time::Zero;
 	timePerFrame = sf::seconds(1 / 60.f);
+
+	this->baseImage.loadFromFile("../Images/BaseImage.png");
 	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	camera = new sf::View(sf::Vector2f(windowWidth/2, windowHeight/2),sf::Vector2f(windowWidth,windowHeight));
-	this->PC = new PlayerCharacter(15, &this->resourceHandler, 4, 4);
+
+	this->PCOne = new PlayerCharacter(15, &this->resourceHandler, 4, 4);
+	this->PCTwo = new PlayerCharacter(17, &this->resourceHandler, 4, 4);
+	this->PCTwo->setCoordinates(500, 500);
+	
+	this->userInterface = new UI(&window, camera);
+	this->userInterface->addPCToUI(PCOne);
+	this->userInterface->addPCToUI(PCTwo);
+
+	Item tempWeapon(16, &this->resourceHandler, "Wie's doom", 5);
+	this->PCOne->addItem(tempWeapon);
+	this->PCOne->equipWeapon(tempWeapon);
+	this->PCTwo->equipWeapon(tempWeapon);
 }
 
 Game::~Game()
 {
 	delete this->tileMap;
-	delete this->PC;
+	delete this->PCOne;
+	delete this->PCTwo;
 	delete this->camera;
+	delete this->userInterface;
 }
 
 State Game::update()
@@ -45,9 +61,22 @@ State Game::update()
 				camera->move(0, -5);
 			}
 		}
-		if (this->PC->isSelected())
+		userInterface->updateUI();
+		if (this->PCOne->isSelected())
 		{
-			this->PC->moveEntityTo(this->mouseClickPosition);
+			this->PCOne->moveEntityTo(this->mouseClickPosition);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+			{
+				this->PCOne->makeAttack(*PCTwo, this->PCOne->getEquippedWeaponDamage());
+			}
+		}
+		if (this->PCTwo->isSelected())
+		{
+			this->PCTwo->moveEntityTo(this->mouseClickPosition);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+			{
+				this->PCTwo->makeAttack(*PCOne, this->PCTwo->getEquippedWeaponDamage());
+			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
@@ -63,7 +92,9 @@ void Game::render()
 	window.clear();
 	this->tileMap->renderTileMap(this->window);
 	window.setView(*camera);
-	window.draw(*this->PC);
+	window.draw(*this->PCOne);
+	window.draw(*this->PCTwo);
+	this->userInterface->drawUI(&this->window);
 	window.display();
 }
 
@@ -76,15 +107,22 @@ void Game::handleEvents()
 		{
 			window.close();
 		}
-
-		if (this->PC->click(window, event))
+		if (this->PCOne->click(window, event))
 		{
-			this->PC->setSelected(true);
+			this->PCOne->setSelected(true);
+			this->PCTwo->setSelected(false);
+			this->PCOne->reset();
 		}
-		
+		if (this->PCTwo->click(window, event))
+		{
+			this->PCTwo->setSelected(true);
+			this->PCOne->setSelected(false);
+			this->PCTwo->reset();
+		}
 		if (event.type == sf::Event::MouseButtonReleased)
 		{
 			this->mouseClickPosition = sf::Mouse::getPosition();
 		}
 	}
 }
+

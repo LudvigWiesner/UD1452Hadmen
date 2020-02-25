@@ -31,10 +31,10 @@ sf::FloatRect Clickable::getBounds()const
 	return this->sprite.getGlobalBounds();
 }
 
-bool Clickable::isInside(const sf::RenderWindow& window) const
+bool Clickable::isInside(const sf::Vector2f &mousePosF) const
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-	sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+	//sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	//sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 	return this->sprite.getGlobalBounds().contains(mousePosF);
 }
 
@@ -43,9 +43,9 @@ void Clickable::reset()
 	this->m_active = false;
 }
 
-bool Clickable::click(const sf::RenderWindow& window, const sf::Event& event)
+bool Clickable::click(const sf::Vector2f &mousePosF)
 {
-	if (event.type == sf::Event::MouseButtonPressed && this->isInside(window) && !this->m_mouseHeld)
+	/*if (event.type == sf::Event::MouseButtonPressed && this->isInside(window) && !this->m_mouseHeld)
 	{
 		this->m_pressed = true;
 		this->m_mouseHeld = true;
@@ -63,7 +63,12 @@ bool Clickable::click(const sf::RenderWindow& window, const sf::Event& event)
 		}
 		this->m_pressed = false;
 		this->m_mouseHeld = false;
+	}*/
+	if (this->isInside(mousePosF))
+	{
+		this->m_active = true;
 	}
+
 	return this->m_active;
 }
 
@@ -82,7 +87,7 @@ void Clickable::setTextureRect(const sf::IntRect intRect)
 	this->sprite.setTextureRect(intRect);
 }
 
-void Clickable::moveSprite(const int horDir, const int vertDir, float speed) // Speed need to be added
+void Clickable::moveSprite(const int horDir, const int vertDir, float speed)
 {
 	this->sprite.move(horDir * speed, vertDir * speed);
 }

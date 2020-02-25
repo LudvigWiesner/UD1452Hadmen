@@ -12,7 +12,7 @@ private:
 	sf::Font fontOne;
 
 	sf::Text characterGUI;
-	Item** characterInventory;
+	Item* characterInventory;
 	int inventoryCapacity;
 	int nrOfItems;
 

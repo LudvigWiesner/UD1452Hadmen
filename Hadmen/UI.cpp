@@ -13,14 +13,21 @@ void UI::updateUIPositions()
 {
 	this->characterGUI.setPosition(5 + camera->getCenter().x - window->getSize().x / 2, camera->getCenter().y - window->getSize().y / 2);
 	this->inventoryBackground.setPosition(camera->getCenter().x - this->inventoryBackground.getGlobalBounds().width + window->getSize().x / 2, camera->getCenter().y + 20 - window->getSize().y / 2);
+	if (this->drawInventory && this->nrOfItems > 0)
+	{
+		for (int i = 0; i < this->nrOfItems; i++)
+		{
+			this->characterInventory[i].setCoordinates(camera->getCenter().x, camera->getCenter().y);
+		}
+	}
 }
 
 void UI::expand()
 {
-	Item** temp;
+	Item* temp;
 	this->inventoryCapacity= this->inventoryCapacity * 2;
 
-	temp = new Item * [this->inventoryCapacity];
+	temp = new Item [this->inventoryCapacity];
 	for (int i = 0; i < this->nrOfItems;i++)
 	{
 		temp[i] = this->characterInventory[i];
@@ -52,18 +59,14 @@ UI::UI(sf::RenderWindow* window, sf::View* camera, ResHandler* resourceHandler)
 	this->inventoryBackground.setPosition(camera->getCenter().x - this->inventoryBackground.getGlobalBounds().width + window->getSize().x / 2,
 		camera->getCenter().y + 20 - window->getSize().y / 2);
 
-	this->inventoryCapacity = 40;
+	this->inventoryCapacity = 20;
 	this->nrOfItems = 0;
-	this->characterInventory = new Item * [inventoryCapacity];
+	this->characterInventory = new Item[inventoryCapacity];
 }
 
 UI::~UI()
 {
 	delete[]this->characters;
-	for (int i = 0; i < this->nrOfItems; i++)
-	{
-		delete this->characterInventory[i];
-	}
 	delete[]this->characterInventory;
 }
 
@@ -85,6 +88,10 @@ void UI::drawUI(sf::RenderWindow* window)
 	if (this->drawInventory)
 	{
 		window->draw(this->inventoryBackground);
+		for (int i = 0; i < this->nrOfItems;i++)
+		{
+			window->draw(this->characterInventory[i]);
+		}
 	}
 	
 }
@@ -96,25 +103,28 @@ void UI::openCloseCharacterInventory()
 		this->drawInventory = true;
 		if (this->characters[0]->isSelected())
 		{
-			if (this->characters[0]->getNrOfItems() > this->inventoryCapacity)
+			this->nrOfItems = characters[0]->getNrOfItems();
+			if (this->nrOfItems > this->inventoryCapacity)
 			{
 				this->expand();
 			}
-			this->nrOfItems = characters[0]->getNrOfItems();
-			this->characters[0]->getAllItems(*this->characterInventory);
-			//for (int i = 0; i < this->nrOfItems; i++)
-			//{
-			//	this->characterInventory[i]->setCoordinates()
-			//}
+			if (this->nrOfItems > 0)
+			{
+				this->characters[0]->getAllItems(this->characterInventory);
+			}
 		}
 		else if (this->characters[1]->isSelected())
 		{
-			if (this->characters[1]->getNrOfItems() > this->inventoryCapacity)
+			this->nrOfItems = characters[1]->getNrOfItems();
+			if (this->nrOfItems > this->inventoryCapacity)
 			{
 				this->expand();
 			}
-			this->nrOfItems = characters[1]->getNrOfItems();
-			this->characters[1]->getAllItems(*this->characterInventory);
+			if (this->nrOfItems > 0)
+			{
+				this->characters[1]->getAllItems(this->characterInventory);
+			}
+			
 		}
 	}
 	else

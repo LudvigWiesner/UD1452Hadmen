@@ -15,7 +15,7 @@ private:
 	bool m_mouseHeld;
 	bool m_active;
 
-	bool isInside(const sf::RenderWindow& window)const;
+	bool isInside(const sf::Vector2f &mousePosF)const;
 protected:
 	void moveSprite(const int horDir, const int vertDir, float speed);
 public:
@@ -25,7 +25,7 @@ public:
 	Clickable(const int index, ResHandler* resourceHandler, float x, float y);
 
 	sf::FloatRect getBounds()const;
-	bool click(const sf::RenderWindow& window, const sf::Event& event);
+	bool click(const sf::Vector2f& mousePosF);
 	bool collision(const Clickable &otherObject)const;
 	void setCoordinates(float xPos, float yPos);
 	void setTextureRect(const sf::IntRect intRect);

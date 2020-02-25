@@ -28,7 +28,6 @@ private:
 
 	UI* userInterface;
 
-	//Melee* Wei;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

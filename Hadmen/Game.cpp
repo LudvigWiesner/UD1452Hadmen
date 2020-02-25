@@ -20,10 +20,9 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 
 	Item tempWeapon(16, &this->resourceHandler, "Wie's doom", 5);
 	this->PCOne->addItem(tempWeapon);
+	this->PCTwo->addItem(tempWeapon);
 	this->PCOne->equipWeapon(tempWeapon);
 	this->PCTwo->equipWeapon(tempWeapon);
-
-	//this->Wei = nullptr; //new Melee(18, &this->resourceHandler, 4, 2, "Wei", 1000, 1000);
 }
 
 Game::~Game()
@@ -33,7 +32,6 @@ Game::~Game()
 	delete this->PCTwo;
 	delete this->camera;
 	delete this->userInterface;
-	//delete this->Wei;
 }
 
 State Game::update()
@@ -46,7 +44,7 @@ State Game::update()
 
 		if ((camera->getCenter().x >= ((windowWidth / 2) )) && (camera->getCenter().y >= ((windowHeight / 2) )))
 		{
-			if ((sf::Mouse::getPosition().x > windowWidth - windowWidth / 5) && (camera->getCenter().x <= 108*50 - (windowWidth/2)))
+			if ((sf::Mouse::getPosition().x > windowWidth - windowWidth / 25) && (camera->getCenter().x <= 108*50 - (windowWidth/2)))
 			{
 				camera->move(5,0);
 			}
@@ -55,11 +53,11 @@ State Game::update()
 			{
 				camera->move(-5, 0);
 			}
-			if ((sf::Mouse::getPosition().y > windowHeight - windowHeight / 5) && (camera->getCenter().y <= 108 * 50 - (windowHeight / 2)))
+			if ((sf::Mouse::getPosition().y > windowHeight - windowHeight / 25) && (camera->getCenter().y <= 108 * 50 - (windowHeight / 2)))
 			{
 				camera->move(0, 5);
 			}
-			else if ((camera->getCenter().y > windowHeight/2 +5) && (sf::Mouse::getPosition().y < windowHeight/5 ) )
+			else if ((camera->getCenter().y > windowHeight/ 2 + 5) && (sf::Mouse::getPosition().y < windowHeight/ 5 ) )
 			{
 				camera->move(0, -5);
 			}
@@ -68,26 +66,15 @@ State Game::update()
 		if (this->PCOne->isSelected())
 		{
 			this->PCOne->moveEntityTo(this->mouseWorldCoordinates);
-			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-			//{
-			//	this->PCOne->makeAttack(*PCTwo, this->PCOne->getEquippedWeaponDamage());
-			//}
 		}
 		if (this->PCTwo->isSelected())
 		{
 			this->PCTwo->moveEntityTo(this->mouseWorldCoordinates);
-			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-			{
-				this->PCTwo->makeAttack(*PCOne, this->PCTwo->getEquippedWeaponDamage());
-			}*/
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			state = State::EXIT;
-		}
-
-
-		
+		}	
 	}
 	return state;
 }
@@ -99,7 +86,6 @@ void Game::render()
 	window.setView(*camera);
 	window.draw(*this->PCOne);
 	window.draw(*this->PCTwo);
-	//window.draw(*this->Wei);
 	this->userInterface->drawUI(&this->window);
 	window.display();
 }
@@ -109,26 +95,37 @@ void Game::handleEvents()
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		if (event.type == sf::Event::Closed)
+		switch (event.type)
 		{
-			window.close();
-		}
-		if (this->PCOne->click(window, event))
-		{
-			this->PCOne->setSelected(true);
-			this->PCTwo->setSelected(false);
-			this->PCOne->reset();
-		}
-		if (this->PCTwo->click(window, event))
-		{
-			this->PCTwo->setSelected(true);
-			this->PCOne->setSelected(false);
-			this->PCTwo->reset();
-		}
-		if (event.type == sf::Event::MouseButtonReleased)
-		{
+		case sf::Event::Closed:
+				window.close();
+				break;
+
+		case sf::Event::MouseButtonReleased:
 			this->mouseClickWindowPosition = sf::Mouse::getPosition(window);
 			this->mouseWorldCoordinates = window.mapPixelToCoords(mouseClickWindowPosition);
+			if (event.key.code == sf::Mouse::Button::Left)
+			{
+				if (this->PCOne->click(mouseWorldCoordinates))
+				{
+					this->PCOne->setSelected(true);
+					this->PCTwo->setSelected(false);
+					this->PCOne->reset();
+				}
+				if (this->PCTwo->click(mouseWorldCoordinates))
+				{
+					this->PCTwo->setSelected(true);
+					this->PCOne->setSelected(false);
+					this->PCTwo->reset();
+				}
+			}
+			break;
+		case sf::Event::KeyReleased:
+			if (event.key.code == sf::Keyboard::I)
+			{
+				this->userInterface->openCloseCharacterInventory();
+			}
+			break;
 		}
 	}
 }

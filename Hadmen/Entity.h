@@ -23,6 +23,8 @@ private:
 	int vertDir;
 
 	void switchSprite();
+	void switchSprite(const int row);
+
 
 	bool alive;
 	int MaxHP;
@@ -31,7 +33,8 @@ private:
 public:
 	Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int nrOfColumns, float speed = 3.0F);
 	Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int nrOfColumns, int evasion, float speed = 3.0F);
-	void moveEntityTo(sf::Vector2i coordinates);
+	void moveEntityTo(sf::Vector2f coordinates);
+	void moveEntityTo(sf::Vector2f coordinates, const int row);
 
 	void takeDamage(const int damage);
 	void makeAttack(Entity& otherEntity, const int damage);

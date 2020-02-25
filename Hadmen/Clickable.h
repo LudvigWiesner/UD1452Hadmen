@@ -31,6 +31,7 @@ public:
 	void setTextureRect(const sf::IntRect intRect);
 	sf::Vector2f getPosition()const;
 	sf::Vector2u getTextureSize()const;
+	void setSpriteScale(float x, float y);
 	// Inherited via Drawable
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

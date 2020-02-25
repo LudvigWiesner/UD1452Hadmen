@@ -30,7 +30,7 @@ Entity::Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int n
 	this->setEvasion(evasion);
 }
 
-void Entity::moveEntityTo(sf::Vector2i coordinates)
+void Entity::moveEntityTo(sf::Vector2f coordinates)
 {
 	this->horDir = NO;
 	this->vertDir = NO;
@@ -55,6 +55,37 @@ void Entity::moveEntityTo(sf::Vector2i coordinates)
 	this->switchSprite();
 }
 
+void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
+{
+	if (row != 1)
+	{
+		this->horDir = NO;
+		this->vertDir = NO;
+		if (coordinates.y > this->getPosition().y + this->getBounds().height)
+		{
+			this->vertDir = UP;
+		}
+		else if (coordinates.y < this->getPosition().y + this->getBounds().height)
+		{
+			this->vertDir = DOWN;
+		}
+		if (coordinates.x > this->getPosition().x + this->getBounds().width)
+		{
+			this->horDir = RIGHT;
+		}
+		else if (coordinates.x < this->getPosition().x + this->getBounds().width)
+		{
+			this->horDir = LEFT;
+		}
+		this->moveSprite(this->horDir, this->vertDir, this->speed);
+		this->switchSprite(row);
+	}
+	else
+	{
+		this->switchSprite(row);
+	}
+}
+
 void Entity::switchSprite()
 {
 	if (this->vertDir == UP)
@@ -74,6 +105,17 @@ void Entity::switchSprite()
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::RIGHT);
 	}
 
+	this->timeCounter = (this->timeCounter + 1) % this->updateTime;
+	if (this->timeCounter == 0)
+	{
+		this->intRect.left = (this->intRect.left + this->intRect.width) % (int)this->getTextureSize().x;
+	}
+	this->setTextureRect(this->intRect);
+}
+
+void Entity::switchSprite(const int row)
+{
+	this->intRect.top = row * this->intRect.height;
 	this->timeCounter = (this->timeCounter + 1) % this->updateTime;
 	if (this->timeCounter == 0)
 	{

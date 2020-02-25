@@ -14,7 +14,7 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->PCTwo = new PlayerCharacter(17, &this->resourceHandler, 4, 4);
 	this->PCTwo->setCoordinates(500, 500);
 	
-	this->userInterface = new UI(&window, camera);
+	this->userInterface = new UI(&window, camera, &this->resourceHandler);
 	this->userInterface->addPCToUI(PCOne);
 	this->userInterface->addPCToUI(PCTwo);
 
@@ -22,6 +22,8 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->PCOne->addItem(tempWeapon);
 	this->PCOne->equipWeapon(tempWeapon);
 	this->PCTwo->equipWeapon(tempWeapon);
+
+	//this->Wei = nullptr; //new Melee(18, &this->resourceHandler, 4, 2, "Wei", 1000, 1000);
 }
 
 Game::~Game()
@@ -31,6 +33,7 @@ Game::~Game()
 	delete this->PCTwo;
 	delete this->camera;
 	delete this->userInterface;
+	//delete this->Wei;
 }
 
 State Game::update()
@@ -64,24 +67,26 @@ State Game::update()
 		userInterface->updateUI();
 		if (this->PCOne->isSelected())
 		{
-			this->PCOne->moveEntityTo(this->mouseClickPosition);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-			{
-				this->PCOne->makeAttack(*PCTwo, this->PCOne->getEquippedWeaponDamage());
-			}
+			this->PCOne->moveEntityTo(this->mouseWorldCoordinates);
+			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+			//{
+			//	this->PCOne->makeAttack(*PCTwo, this->PCOne->getEquippedWeaponDamage());
+			//}
 		}
 		if (this->PCTwo->isSelected())
 		{
-			this->PCTwo->moveEntityTo(this->mouseClickPosition);
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+			this->PCTwo->moveEntityTo(this->mouseWorldCoordinates);
+			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
 			{
 				this->PCTwo->makeAttack(*PCOne, this->PCTwo->getEquippedWeaponDamage());
-			}
+			}*/
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			state = State::EXIT;
 		}
+
+
 		
 	}
 	return state;
@@ -94,6 +99,7 @@ void Game::render()
 	window.setView(*camera);
 	window.draw(*this->PCOne);
 	window.draw(*this->PCTwo);
+	//window.draw(*this->Wei);
 	this->userInterface->drawUI(&this->window);
 	window.display();
 }
@@ -121,7 +127,8 @@ void Game::handleEvents()
 		}
 		if (event.type == sf::Event::MouseButtonReleased)
 		{
-			this->mouseClickPosition = sf::Mouse::getPosition();
+			this->mouseClickWindowPosition = sf::Mouse::getPosition(window);
+			this->mouseWorldCoordinates = window.mapPixelToCoords(mouseClickWindowPosition);
 		}
 	}
 }

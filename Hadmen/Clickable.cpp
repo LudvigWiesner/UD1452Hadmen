@@ -84,7 +84,7 @@ void Clickable::setTextureRect(const sf::IntRect intRect)
 
 void Clickable::moveSprite(const int horDir, const int vertDir, float speed) // Speed need to be added
 {
-	this->sprite.move(horDir , vertDir);
+	this->sprite.move(horDir * speed, vertDir * speed);
 }
 
 sf::Vector2f Clickable::getPosition() const
@@ -95,6 +95,11 @@ sf::Vector2f Clickable::getPosition() const
 sf::Vector2u Clickable::getTextureSize() const
 {
 	return this->texture.getSize();
+}
+
+void Clickable::setSpriteScale(float x, float y)
+{
+	this->sprite.setScale(x, y);
 }
 
 void Clickable::draw(sf::RenderTarget& target, sf::RenderStates states) const

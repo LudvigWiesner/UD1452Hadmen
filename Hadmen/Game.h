@@ -5,6 +5,7 @@
 #include "Reshandler.h"
 #include "PlayerCharacter.h"
 #include "UI.h"
+//#include "Melee.h"
 
 class Game : public GameState
 {
@@ -22,10 +23,12 @@ private:
 
 	PlayerCharacter* PCOne;
 	PlayerCharacter* PCTwo;
-	sf::Vector2i mouseClickPosition;
+	sf::Vector2i mouseClickWindowPosition;
+	sf::Vector2f mouseWorldCoordinates;
 
 	UI* userInterface;
 
+	//Melee* Wei;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

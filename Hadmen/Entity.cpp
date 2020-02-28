@@ -34,23 +34,22 @@ void Entity::moveEntityTo(sf::Vector2f coordinates)
 {
 	this->horDir = NO;
 	this->vertDir = NO;
-	if (coordinates.y > this->getPosition().y + this->getBounds().height)
+	if (coordinates.y > this->getPosition().y + this->getBounds().height / 2)
 	{
 		this->vertDir = UP;
 	}
-	else if (coordinates.y < this->getPosition().y + this->getBounds().height)
+	else if (coordinates.y < this->getPosition().y)
 	{
 		this->vertDir = DOWN;
 	}
-	if (coordinates.x > this->getPosition().x + this->getBounds().width)
+	if (coordinates.x > this->getPosition().x + this->getBounds().width / 2)
 	{
 		this->horDir = RIGHT;
 	}
-	else if (coordinates.x < this->getPosition().x + this->getBounds().width)
+	else if (coordinates.x < this->getPosition().x)
 	{
 		this->horDir = LEFT;
 	}
-
 	this->moveSprite(this->horDir, this->vertDir, this->speed);
 	this->switchSprite();
 }
@@ -65,7 +64,7 @@ void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
 		{
 			this->vertDir = UP;
 		}
-		else if (coordinates.y < this->getPosition().y + this->getBounds().height)
+		else if (coordinates.y < this->getPosition().y)
 		{
 			this->vertDir = DOWN;
 		}
@@ -73,7 +72,7 @@ void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
 		{
 			this->horDir = RIGHT;
 		}
-		else if (coordinates.x < this->getPosition().x + this->getBounds().width)
+		else if (coordinates.x < this->getPosition().x)
 		{
 			this->horDir = LEFT;
 		}

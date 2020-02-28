@@ -3,9 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
 #include "Reshandler.h"
+#include "ItemHandler.h"
 #include "PlayerCharacter.h"
 #include "UI.h"
-//#include "Melee.h"
 
 class Game : public GameState
 {
@@ -19,7 +19,7 @@ private:
 
 	TileMap* tileMap;
 	ResHandler resourceHandler;
-	sf::CircleShape circle;
+	ItemHandler* itemHandler;
 
 	PlayerCharacter* PCOne;
 	PlayerCharacter* PCTwo;

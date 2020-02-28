@@ -10,12 +10,14 @@ class UI
 {
 private:
 	sf::Font fontOne;
+	sf::Font fontTwo;
 
 	sf::Text characterGUI;
-	Item* characterInventory;
+	Item** characterInventory;
+	sf::Text** nrOfEachItemInventory;
 	int inventoryCapacity;
 	int nrOfItems;
-
+	
 	sf::RenderWindow* window;
 	sf::View* camera;
 
@@ -27,8 +29,14 @@ private:
 	sf::Texture inventoryBackgroundTexture;
 	bool drawInventory;
 
+	bool drawSkillScreen;
+	sf::RectangleShape skillScreenBackground;
+	sf::Texture skillScreenBackgroundTexture;
+	sf::Text skillScreen;
+
 	void updateCharacterGUI();
 	void updateUIPositions();
+
 	
 	void expand();
 public:
@@ -37,11 +45,11 @@ public:
 
 	void addPCToUI(PlayerCharacter* PC);
 	void updateUI();
-
-
 	void drawUI(sf::RenderWindow* window);
+
 	void openCloseCharacterInventory();
-
-
+	void openCloseCharacterSkillScreen();
+	void updateSkillScreen();
+	void updateInventory();
 };
 #endif // !UI_H

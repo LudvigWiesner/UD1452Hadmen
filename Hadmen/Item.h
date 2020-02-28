@@ -11,7 +11,7 @@ private:
 	int damage;
 public:
 	Item();
-	Item(const int index, ResHandler* resourceHandler, std::string name, int damage);
+	Item(const int index, ResHandler* resourceHandler, std::string name, int nrOfItem = 1, int damage = 0);
 
 	int getNrOfItem()const;
 	void removeNrOfItem(const int nrToRemove);

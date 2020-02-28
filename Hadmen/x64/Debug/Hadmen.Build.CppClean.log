@@ -1,5 +1,12 @@
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\vc142.pdb
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\vc142.idb
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\tilemap.obj
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\tileentity.obj
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\resourcetile.obj
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\clickable.obj
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\itemhandler.obj
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\item.obj
+c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\ui.obj
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\startmeny.obj
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\reshandler.obj
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\main.obj
@@ -8,9 +15,6 @@ c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\gameover.obj
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\game.obj
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\entity.obj
 c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\playercharacter.obj
-c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\tilemap.obj
-c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\tileentity.obj
-c:\users\ludvig\source\repos\hadmen\hadmen\x64\debug\clickable.obj
 c:\users\ludvig\source\repos\hadmen\x64\debug\hadmen.exe
 c:\users\ludvig\source\repos\hadmen\x64\debug\hadmen.ilk
 c:\users\ludvig\source\repos\hadmen\x64\debug\hadmen.pdb

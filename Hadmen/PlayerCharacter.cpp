@@ -7,9 +7,12 @@ PlayerCharacter::PlayerCharacter(const int index, ResHandler* resourceHandler, i
 	this->selected = false;
 
 	this->equippedWeapon = nullptr;
-	this->inventory = new List<Item>;
+	this->inventory = new List<Item*>;
 
+	this->baseLevel = 1;
+	this->baseExp = 0;
 	this->stamina = 100;
+
 	this->melee = 1;
 	this->ranged = 1;
 	this->woodcutting = 1;
@@ -22,6 +25,10 @@ PlayerCharacter::PlayerCharacter(const int index, ResHandler* resourceHandler, i
 
 PlayerCharacter::~PlayerCharacter()
 {
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		delete this->inventory->getAt(i);
+	}
 	delete this->inventory;
 	delete this->equippedWeapon;
 }
@@ -43,18 +50,73 @@ sf::Vector2f PlayerCharacter::getPlayerPosition() const
 
 void PlayerCharacter::addItem(const Item itemToAdd)
 {
-	this->inventory->insertAt(this->inventory->length(), itemToAdd);
+	bool found = false;
+	int index = 0;
+
+	for (int i = 0; i < this->inventory->length();i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemToAdd.getName())
+		{
+			found = true;
+			index = i;
+			i = this->inventory->length();
+		}
+	}
+	if (found)
+	{
+		this->inventory->getAt(index)->addNrOfItem(1);
+	}
+	else
+	{
+		Item* temp = new Item(itemToAdd);
+		this->inventory->insertAt(this->inventory->length(), temp);
+	}
+
 }
 
-void PlayerCharacter::removeItem(const Item itemToRemove)
+void PlayerCharacter::removeItem(Item* itemToRemove)
 {
-	this->inventory->removeElement(itemToRemove);
+	int index = -1;
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemToRemove->getName())
+		{
+			index = i;
+			i = this->inventory->length();
+		}
+	}
+	if (index != -1)
+	{
+		delete this->inventory->getAt(index); // causes memory leaks
+		this->inventory->removeAt(index);
+	}
+	
 }
 
-int PlayerCharacter::getNrOfAnItem(const Item itemToCount)
+int PlayerCharacter::getNrOfAnItem(Item* itemToCount)
 {
-	int index = this->inventory->findElement(itemToCount);
-	return this->inventory->getAt(index).getNrOfItem();
+	int index = -1;
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemToCount->getName())
+		{
+			index = i;
+			i = this->inventory->length();
+		}
+	}
+	if (index != -1)
+	{
+		return this->inventory->getAt(index)->getNrOfItem();
+	}
+	else
+	{
+		return index;
+	}
+}
+
+int PlayerCharacter::getNrOfAnItem(const int index)
+{
+	return this->inventory->getAt(index)->getNrOfItem();
 }
 
 int PlayerCharacter::getNrOfItems() const
@@ -62,9 +124,32 @@ int PlayerCharacter::getNrOfItems() const
 	return this->inventory->length();
 }
 
-void PlayerCharacter::getAllItems(Item arr[])
+void PlayerCharacter::getAllItems(Item* arr[])
 {
 	this->inventory->getAll(arr, this->inventory->length());
+}
+
+void PlayerCharacter::addNrToAnItem(Item* itemToAddTo, const int nr)
+{
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemToAddTo->getName())
+		{
+			this->inventory->getAt(i)->addNrOfItem(nr);
+			i = this->inventory->length();
+		}
+	}
+}
+
+void PlayerCharacter::removeNrFromAnItem(Item* itemToRemoveFrom, const int nr)
+{
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemToRemoveFrom->getName())
+		{
+			this->inventory->getAt(i)->removeNrOfItem(nr);
+		}
+	}
 }
 
 int PlayerCharacter::getEquippedWeaponDamage() const
@@ -85,7 +170,13 @@ void PlayerCharacter::addExp(std::string attribute, float expToAdd)
 {
 	if (attribute == "Melee")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->melee += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 	else if (attribute == "Ranged")
 	{
@@ -111,6 +202,28 @@ void PlayerCharacter::addExp(std::string attribute, float expToAdd)
 	{
 		this->construction += expToAdd;
 	}
+}
+
+void PlayerCharacter::addBaseExp()
+{
+	this->baseExp += 1;
+	if (this->baseExp == 5)
+	{
+		this->increaseMaxHP(10);
+		this->increaseBaseStamina(10);
+		this->baseLevel += 1;
+		this->baseExp = 0;
+	}
+}
+
+void PlayerCharacter::increaseBaseStamina(const int stamina)
+{
+	this->stamina += stamina;
+}
+
+int PlayerCharacter::getBaseLevel() const
+{
+	return this->baseLevel;
 }
 
 int PlayerCharacter::getMeleeLevel() const
@@ -141,6 +254,11 @@ int PlayerCharacter::getHuntingLevel() const
 int PlayerCharacter::getEngineeringLevel() const
 {
 	return static_cast<int>(this->engineering);
+}
+
+int PlayerCharacter::getCookingLevel() const
+{
+	return static_cast<int>(this->cooking);
 }
 
 int PlayerCharacter::getConstructionLevel() const

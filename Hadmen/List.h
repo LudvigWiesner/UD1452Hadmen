@@ -20,7 +20,7 @@ public:
 	T getAt(int pos)const; //throw(...)
 	void removeAt(int pos); //throw(...)
 	bool removeElement(const T &data);
-	bool findElement(const T &toFind);
+	int findElement(const T &toFind);
 	int length()const;
 	void getAll(T arr[], int cap); //throw(...)
 };
@@ -249,20 +249,22 @@ bool List<T>::removeElement(const T &data)
 	return success;
 }
 template <class T>
-bool List<T>::findElement(const T &toFind)
+int List<T>::findElement(const T &toFind)
 {
-	bool success = false;
+	int index = -1;
+	int counter = 0;
 	Node<T>* current = head;
 	while (current != nullptr)
 	{
 		if (current->data == toFind)
 		{
-			success = true;
+			index = counter;
 			break;
 		}
 		current = current->next;
+		counter++;
 	}
-	return success;
+	return index;
 }
 template <class T>
 int List<T>::length()const

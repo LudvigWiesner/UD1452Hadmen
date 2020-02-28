@@ -10,6 +10,8 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	camera = new sf::View(sf::Vector2f(windowWidth/2, windowHeight/2),sf::Vector2f(windowWidth,windowHeight));
 
+	this->itemHandler = new ItemHandler(&this->resourceHandler);
+
 	this->PCOne = new PlayerCharacter(15, &this->resourceHandler, 4, 4);
 	this->PCTwo = new PlayerCharacter(17, &this->resourceHandler, 4, 4);
 	this->PCTwo->setCoordinates(500, 500);
@@ -18,11 +20,22 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->userInterface->addPCToUI(PCOne);
 	this->userInterface->addPCToUI(PCTwo);
 
-	Item tempWeapon(16, &this->resourceHandler, "Wie's doom", 5);
-	this->PCOne->addItem(tempWeapon);
-	this->PCTwo->addItem(tempWeapon);
-	this->PCOne->equipWeapon(tempWeapon);
-	this->PCTwo->equipWeapon(tempWeapon);
+	this->PCOne->addItem(this->itemHandler->getItem(1));
+	this->PCOne->addItem(this->itemHandler->getItem(0));
+	this->PCOne->addItem(this->itemHandler->getItem(2));
+	this->PCOne->addItem(this->itemHandler->getItem(3));
+	this->PCOne->addItem(this->itemHandler->getItem(4));
+	this->PCOne->addItem(this->itemHandler->getItem(5));
+	this->PCOne->addItem(this->itemHandler->getItem(7));
+	this->PCOne->addItem(this->itemHandler->getItem(5));
+	this->PCOne->addItem(this->itemHandler->getItem(5));
+
+	this->PCOne->addNrToAnItem(&this->itemHandler->getItem(1), 2);
+	this->PCOne->addNrToAnItem(&this->itemHandler->getItem(3), 6);
+	this->PCOne->addNrToAnItem(&this->itemHandler->getItem(4), 12);
+
+	this->PCOne->equipWeapon(this->itemHandler->getItem(7));
+	this->PCTwo->equipWeapon(this->itemHandler->getItem(7));
 }
 
 Game::~Game()
@@ -32,6 +45,7 @@ Game::~Game()
 	delete this->PCTwo;
 	delete this->camera;
 	delete this->userInterface;
+	delete this->itemHandler;
 }
 
 State Game::update()
@@ -110,12 +124,16 @@ void Game::handleEvents()
 				{
 					this->PCOne->setSelected(true);
 					this->PCTwo->setSelected(false);
+					this->userInterface->updateInventory();
+					this->userInterface->updateSkillScreen();
 					this->PCOne->reset();
 				}
 				if (this->PCTwo->click(mouseWorldCoordinates))
 				{
 					this->PCTwo->setSelected(true);
 					this->PCOne->setSelected(false);
+					this->userInterface->updateInventory();
+					this->userInterface->updateSkillScreen();
 					this->PCTwo->reset();
 				}
 			}
@@ -124,6 +142,20 @@ void Game::handleEvents()
 			if (event.key.code == sf::Keyboard::I)
 			{
 				this->userInterface->openCloseCharacterInventory();
+			}
+			else if (event.key.code == sf::Keyboard::C)
+			{
+				this->userInterface->openCloseCharacterSkillScreen();
+			}
+			else if (event.key.code == sf::Keyboard::H)
+			{
+				this->PCOne->removeNrFromAnItem(&this->itemHandler->getItem(4), 4);
+				this->userInterface->updateUI();
+			}
+			else if (event.key.code == sf::Keyboard::J)
+			{
+				this->PCOne->removeItem(&this->itemHandler->getItem(1));
+				this->userInterface->updateUI();
 			}
 			break;
 		}

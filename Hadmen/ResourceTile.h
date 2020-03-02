@@ -9,7 +9,7 @@ class ResourceTile : public TileEntity
 private:
 	std::string name;
 public:
-	ResourceTile(const int index, ResHandler *resourceHandler, std::string name, int x,int y);
+	ResourceTile(const int index, ResHandler *resourceHandler, std::string name, float x, float y);
 
 	int getResource()const;
 	std::string getName()const;

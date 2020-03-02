@@ -20,6 +20,9 @@ ResHandler::ResHandler()
 	this->textures[14].loadFromFile("../Images/GrassTexture.png");
 	this->textures[15].loadFromFile("../Images/CharacterSpriteSheet1.png");
 	this->textures[16].loadFromFile("../Images/TestSword.png");
+	this->textures[17].loadFromFile("../Images/CharacterSpriteSheet2.png");
+	this->textures[18].loadFromFile("../Images/smokeSheet.png");
+	this->textures[19].loadFromFile("../Images/InventoryBackground.jpg");
 }
 
 ResHandler::~ResHandler()

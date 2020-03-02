@@ -36,6 +36,8 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 
 	this->PCOne->equipWeapon(this->itemHandler->getItem(7));
 	this->PCTwo->equipWeapon(this->itemHandler->getItem(7));
+
+	this->Wei = new Melee(18, &this->resourceHandler, 4, 2, "Bad Guy", 1000, 1000);
 }
 
 Game::~Game()
@@ -46,6 +48,7 @@ Game::~Game()
 	delete this->camera;
 	delete this->userInterface;
 	delete this->itemHandler;
+	delete this->Wei;
 }
 
 State Game::update()
@@ -79,12 +82,18 @@ State Game::update()
 		userInterface->updateUI();
 		if (this->PCOne->isSelected())
 		{
-			this->PCOne->moveEntityTo(this->mouseWorldCoordinates);
+			this->PCOne->moveEntityTo(this->playerGoToCoordinates);
 		}
 		if (this->PCTwo->isSelected())
 		{
-			this->PCTwo->moveEntityTo(this->mouseWorldCoordinates);
+			this->PCTwo->moveEntityTo(this->playerGoToCoordinates);
 		}
+		if (this->Wei->ifPlayerDetected(this->Wei->targetSelection(this->PCOne, this->PCTwo)))
+		{
+
+		}
+		this->Wei->atkCounter(timePerFrame);
+		this->Wei->targetChangeCD(timePerFrame);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			state = State::EXIT;
@@ -100,6 +109,7 @@ void Game::render()
 	window.setView(*camera);
 	window.draw(*this->PCOne);
 	window.draw(*this->PCTwo);
+	window.draw(*this->Wei);
 	this->userInterface->drawUI(&this->window);
 	window.display();
 }
@@ -120,6 +130,7 @@ void Game::handleEvents()
 			this->mouseWorldCoordinates = window.mapPixelToCoords(mouseClickWindowPosition);
 			if (event.key.code == sf::Mouse::Button::Left)
 			{
+				this->playerGoToCoordinates = mouseWorldCoordinates;
 				if (this->PCOne->click(mouseWorldCoordinates))
 				{
 					this->PCOne->setSelected(true);
@@ -135,6 +146,51 @@ void Game::handleEvents()
 					this->userInterface->updateInventory();
 					this->userInterface->updateSkillScreen();
 					this->PCTwo->reset();
+				}
+				if (this->userInterface->getButtonOne()->click(mouseWorldCoordinates))
+				{
+					this->userInterface->moveToCharOne();
+				}
+				if (this->userInterface->getButtonTwo()->click(mouseWorldCoordinates))
+				{
+					this->userInterface->moveToCharTwo();
+				}
+			}
+			if (event.key.code == sf::Mouse::Button::Right)
+			{
+				if (this->PCOne->isSelected())
+				{
+					int xPos = static_cast<int>(this->mouseWorldCoordinates.x);
+					int yPos = static_cast<int>(this->mouseWorldCoordinates.y);
+					TileEntity* selectedTile;
+					ResourceTile* castPtr;
+					if (xPos % 50 == 0)
+					{
+						xPos = xPos / 50;
+					}
+					else
+					{
+						xPos = xPos / 50 + 1;
+					}
+					if (yPos % 50 == 0)
+					{
+						yPos = yPos / 50;
+					}
+					else
+					{
+						yPos = yPos / 50 + 1;
+					}
+					selectedTile = this->tileMap->getTile(xPos, yPos);
+					
+					castPtr = dynamic_cast<ResourceTile*>(selectedTile);
+					if (castPtr != nullptr)
+					{
+
+					}
+				}
+				else if (this->PCTwo->isSelected())
+				{
+
 				}
 			}
 			break;

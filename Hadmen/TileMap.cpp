@@ -87,3 +87,8 @@ void TileMap::renderTileMap(sf::RenderWindow& targetWindow)
 	}
 
 }
+
+TileEntity* TileMap::getTile(int x, int y)
+{
+	return *arrBackgrounds[x, y];
+}

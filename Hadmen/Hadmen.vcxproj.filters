@@ -43,6 +43,12 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{c5787f35-143d-4526-b6dd-227371d64a13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Sounds">
+      <UniqueIdentifier>{1e3beaa7-dc51-4b60-8e1e-eb2f624944b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Constructions">
+      <UniqueIdentifier>{8efb0e22-145e-40da-aacf-66798ab0c531}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TileEntity.cpp">
@@ -87,11 +93,26 @@
     <ClCompile Include="UI.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="ItemHandler.cpp">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClCompile>
     <ClCompile Include="Melee.cpp">
       <Filter>Source Files\Entity &amp; Characters\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ItemHandler.cpp">
-      <Filter>Source Files\ResourceHandler</Filter>
+    <ClCompile Include="Music.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Construction.cpp">
+      <Filter>Source Files\Constructions</Filter>
+    </ClCompile>
+    <ClCompile Include="Furnace.cpp">
+      <Filter>Source Files\Constructions</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterPurifier.cpp">
+      <Filter>Source Files\Constructions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,11 +164,26 @@
     <ClInclude Include="UI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ItemHandler.h">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClInclude>
     <ClInclude Include="Melee.h">
       <Filter>Source Files\Entity &amp; Characters\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="ItemHandler.h">
-      <Filter>Source Files\ResourceHandler</Filter>
+    <ClInclude Include="Music.h">
+      <Filter>Source Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Source Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Construction.h">
+      <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="Furnace.h">
+      <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterPurifier.h">
+      <Filter>Source Files\Constructions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

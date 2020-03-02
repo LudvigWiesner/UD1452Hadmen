@@ -19,5 +19,5 @@ public:
 	virtual ~TileMap();
 
 	void renderTileMap(sf::RenderWindow &targetWindow);
-
+	TileEntity* getTile(int x, int y);
 };

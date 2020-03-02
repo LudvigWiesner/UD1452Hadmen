@@ -140,10 +140,7 @@ void Entity::takeDamage(const int damage)
 
 void Entity::makeAttack(Entity& otherEntity, const int damage)
 {
-	if (this->getBounds().intersects(otherEntity.getBounds()))
-	{
-		otherEntity.takeDamage(damage);
-	}
+	otherEntity.takeDamage(damage);
 }
 
 void Entity::setEvasion(const int evasion)

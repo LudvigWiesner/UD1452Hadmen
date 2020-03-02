@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "PlayerCharacter.h"
 #include "Reshandler.h"
-#include <vector>
+
 
 class UI
 {
@@ -34,10 +34,18 @@ private:
 	sf::Texture skillScreenBackgroundTexture;
 	sf::Text skillScreen;
 
+	sf::RectangleShape rectShape;
+	sf::RectangleShape rectShapeTwo;
+	sf::RectangleShape hpOneBorder;
+	sf::RectangleShape hpTwoBorder;
+	sf::Text HpOne;
+	sf::Text HpTwo;
+
+	Clickable* CharOneButton;
+	Clickable* CharTwoButton;
+
 	void updateCharacterGUI();
 	void updateUIPositions();
-
-	
 	void expand();
 public:
 	UI(sf::RenderWindow* window, sf::View* camera, ResHandler* resourceHandler);
@@ -51,5 +59,13 @@ public:
 	void openCloseCharacterSkillScreen();
 	void updateSkillScreen();
 	void updateInventory();
+
+	void moveToCharOne();
+	void moveToCharTwo();
+	Clickable* getButtonOne();
+	Clickable* getButtonTwo();
+	void unstuckCamera();
+
+
 };
 #endif // !UI_H

@@ -30,24 +30,24 @@ bool Melee::ifPlayerDetected(PlayerCharacter* player)
 				this->playerDetector = true;
 				this->target = player;
 
-				if ((px - mx) >= -atkRNG && distance < 75)
+				if ((px - mx) >= -atkRNG && (px - mx) < 0 && distance < 75)
 				{
 					this->moveEntityTo(sf::Vector2f(player->getPosition().x - 50.0f, this->getPosition().y), 3);
 					this->attack(player);
 
 				}
-				else if ((px - mx) <= atkRNG && distance < 75)
+				else if ((px - mx) <= atkRNG && (px - mx) > 0 && distance < 75)
 				{
 					this->moveEntityTo(sf::Vector2f(player->getPosition().x + 50.0f, this->getPosition().y), 2);
 
 					this->attack(player);
 				}
-				else if (py - my >= -atkRNG && distance < 75)
+				else if (py - my >= -atkRNG && (py - my) < 0 && distance < 75)
 				{
 					this->moveEntityTo(sf::Vector2f(this->getPosition().x, player->getPosition().y - 50.0f), 3);
 					this->attack(player);
 				}
-				else if (py - my <= atkRNG && distance < 75)
+				else if (py - my <= atkRNG && (py - my) > 0 && distance < 75)
 				{
 					this->moveEntityTo(sf::Vector2f(this->getPosition().x, player->getPosition().y + 50.0f), 2);
 					this->attack(player);
@@ -74,11 +74,7 @@ bool Melee::ifPlayerDetected(PlayerCharacter* player)
 			
 			this->moveEntityTo(sf::Vector2f(this->getPosition().x, this->getPosition().y), 1);
 		}
-
 	}
-		
-	
-
 	return this->playerDetector;
 }
 

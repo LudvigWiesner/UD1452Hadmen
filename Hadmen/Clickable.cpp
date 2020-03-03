@@ -10,6 +10,7 @@ Clickable::Clickable(const int index, ResHandler* resourceHandler)
 	this->m_active = false;
 	this->texture = resourceHandler->getTexture(index);
 	this->sprite.setTexture(this->texture);
+	this->sprite.setOrigin(this->sprite.getLocalBounds().left / 2, this->sprite.getLocalBounds().top / 2);
 }
 
 Clickable::Clickable(const int index, ResHandler* resourceHandler, float x, float y)
@@ -18,6 +19,7 @@ Clickable::Clickable(const int index, ResHandler* resourceHandler, float x, floa
 	this->texture = resourceHandler->getTexture(index);
 	this->sprite.setTexture(this->texture);
 	this->sprite.setPosition(x, y);
+	this->sprite.setOrigin(this->sprite.getLocalBounds().left / 2, this->sprite.getLocalBounds().top / 2);
 }
 
 Clickable::Clickable(const Clickable &otherClickable)

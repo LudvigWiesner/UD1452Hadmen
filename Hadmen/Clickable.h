@@ -21,6 +21,7 @@ public:
 	Clickable();
 	Clickable(const int index, ResHandler* resourceHandler);
 	Clickable(const int index, ResHandler* resourceHandler, float x, float y);
+	Clickable(const Clickable &otherClickable);
 
 	sf::FloatRect getBounds()const;
 	bool click(const sf::Vector2f& mousePosF);
@@ -30,6 +31,7 @@ public:
 	sf::Vector2f getPosition()const;
 	sf::Vector2u getTextureSize()const;
 	void setSpriteScale(float x, float y);
+	void setTexture(const int index, ResHandler* resourceHandler);
 	// Inherited via Drawable
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

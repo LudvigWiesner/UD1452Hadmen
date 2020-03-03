@@ -1,5 +1,4 @@
 #include "TileMap.h"
-#include "iostream"
 
 TileMap::TileMap(sf::Image& tileRef, ResHandler* resourceHandler)
 	:tileSize(50.0f)
@@ -16,18 +15,12 @@ TileMap::TileMap(sf::Image& tileRef, ResHandler* resourceHandler)
 	{
 		for (int X = 0; X < TILEMAPSIZE; X++)
 		{
-			if (this->mapRef.getPixel(X, Y) == sf::Color::Color(55, 193, 25))
-			{
-				
-				arrBackgrounds[X][Y] = new TileEntity(7, resourceHandler, X * 50.0f, Y * 50.0f);
-			}
-			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(146, 146, 146))
+			if (this->mapRef.getPixel(X, Y) == sf::Color::Color(146, 146, 146))
 			{
 				arrBackgrounds[X][Y] = new ResourceTile(0, resourceHandler, "Aluminium Deposit", X * 50.0f, Y * 50.0f);
 			}
 			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(0, 0, 0))
 			{
-
 				arrBackgrounds[X][Y] = new ResourceTile(1, resourceHandler, "Coal Deposit", X * 50.0f, Y * 50.0f);
 			}
 			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(03, 00, 148))
@@ -38,15 +31,25 @@ TileMap::TileMap(sf::Image& tileRef, ResHandler* resourceHandler)
 			{
 				arrBackgrounds[X][Y] = new ResourceTile(2, resourceHandler, "Iron Deposit", X * 50.0f, Y * 50.0f);
 			}
-			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(0, 148, 0))
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color())
+			{
+				arrBackgrounds[X][Y] = new ResourceTile(6, resourceHandler, "Tree", X * 50.0f, Y * 50.0f); //lägg till
+			}
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color())
+			{
+				arrBackgrounds[X][Y] = new ResourceTile(5, resourceHandler, "Stone Deposit", X * 50.0f, Y * 50.0f); //lägg till
+			}
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(55, 193, 25)) // Wall
+			{
+				arrBackgrounds[X][Y] = new TileEntity(7, resourceHandler, X * 50.0f, Y * 50.0f);
+			}
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(0, 148, 0)) // Grass
 			{
 				arrBackgrounds[X][Y] = new TileEntity(14, resourceHandler, X * 50.0f, Y * 50.0f);
 			}
 			else
 			{
-
-				arrBackgrounds[X][Y] = new TileEntity(6, resourceHandler, X * 50.0f, Y * 50.0f);
-
+				arrBackgrounds[X][Y] = new TileEntity(12, resourceHandler, X * 50.0f, Y * 50.0f); // Gravel
 			}
 		}
 	}
@@ -55,7 +58,6 @@ TileMap::TileMap(sf::Image& tileRef, ResHandler* resourceHandler)
 
 TileMap::~TileMap()
 {
-
 	for (int Y = 0; Y < TILEMAPSIZE; Y++)
 	{
 		for (int X = 0; X < TILEMAPSIZE; X++)
@@ -68,27 +70,21 @@ TileMap::~TileMap()
 	{
 		delete[] arrBackgrounds[i];
 	}
-	
 		delete[] arrBackgrounds;
-	
-	
 }
 
 void TileMap::renderTileMap(sf::RenderWindow& targetWindow)
 {
-
 	for (int Y = 0; Y < TILEMAPSIZE; Y++)
 	{
 		for (int X = 0; X < TILEMAPSIZE; X++)
 		{
 			targetWindow.draw(*this->arrBackgrounds[X][Y]);
-
 		}
 	}
-
 }
 
 TileEntity* TileMap::getTile(int x, int y)
 {
-	return *arrBackgrounds[x, y];
+	return arrBackgrounds[x][y];
 }

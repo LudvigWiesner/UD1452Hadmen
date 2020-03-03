@@ -64,7 +64,7 @@ void PlayerCharacter::addItem(const Item itemToAdd)
 	}
 	if (found)
 	{
-		this->inventory->getAt(index)->addNrOfItem(1);
+		this->inventory->getAt(index)->addNrOfItem(itemToAdd.getNrOfItem());
 	}
 	else
 	{

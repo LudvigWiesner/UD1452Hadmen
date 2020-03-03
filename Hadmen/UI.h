@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "PlayerCharacter.h"
 #include "Reshandler.h"
+#include "ResourceTile.h"
 
 
 class UI
@@ -44,6 +45,9 @@ private:
 	Clickable* CharOneButton;
 	Clickable* CharTwoButton;
 
+	sf::Text MenyOption;
+	bool drawMeny;
+
 	void updateCharacterGUI();
 	void updateUIPositions();
 	void expand();
@@ -66,6 +70,11 @@ public:
 	Clickable* getButtonTwo();
 	void unstuckCamera();
 
+	void displayMeny(ResourceTile* tileToDisplay, const sf::Vector2f &position);
+	void openCloseMeny(bool trigger);
+	bool getIfMenyDrawn()const;
+	sf::Vector2f getMenyPosition()const;
+	sf::FloatRect getMenyBounds()const;
 
 };
 #endif // !UI_H

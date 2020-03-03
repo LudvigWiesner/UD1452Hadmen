@@ -20,6 +20,14 @@ Clickable::Clickable(const int index, ResHandler* resourceHandler, float x, floa
 	this->sprite.setPosition(x, y);
 }
 
+Clickable::Clickable(const Clickable &otherClickable)
+{
+	this->m_active = otherClickable.m_active;
+	this->texture = otherClickable.texture;
+	this->sprite.setTexture(this->texture);
+	this->sprite.setPosition(otherClickable.getPosition());
+}
+
 sf::FloatRect Clickable::getBounds()const
 {
 	return this->sprite.getGlobalBounds();
@@ -77,6 +85,12 @@ sf::Vector2u Clickable::getTextureSize() const
 void Clickable::setSpriteScale(float x, float y)
 {
 	this->sprite.setScale(x, y);
+}
+
+void Clickable::setTexture(const int index, ResHandler* resourceHandler)
+{
+	this->texture = resourceHandler->getTexture(index);
+	this->sprite.setTexture(this->texture);
 }
 
 void Clickable::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -114,6 +114,9 @@
     <ClCompile Include="WaterPurifier.cpp">
       <Filter>Source Files\Constructions</Filter>
     </ClCompile>
+    <ClCompile Include="Ranged.cpp">
+      <Filter>Source Files\Entity &amp; Characters\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceTile.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="WaterPurifier.h">
       <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranged.h">
+      <Filter>Source Files\Entity &amp; Characters\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

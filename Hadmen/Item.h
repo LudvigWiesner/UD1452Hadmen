@@ -12,6 +12,7 @@ private:
 public:
 	Item();
 	Item(const int index, ResHandler* resourceHandler, std::string name, int nrOfItem = 1, int damage = 0);
+	Item(const Item& otherItem);
 
 	int getNrOfItem()const;
 	void removeNrOfItem(const int nrToRemove);

@@ -128,6 +128,9 @@ UI::UI(sf::RenderWindow* window, sf::View* camera, ResHandler* resourceHandler)
 	this->CharOneButton = new Clickable(2, resourceHandler);
 	this->CharTwoButton = new Clickable(2, resourceHandler);
 	
+	this->MenyOption.setFont(this->fontTwo);
+	this->MenyOption.setCharacterSize(30);
+	this->drawMeny = false;
 }
 
 UI::~UI()
@@ -167,6 +170,10 @@ void UI::drawUI(sf::RenderWindow* window)
 	window->draw(*this->CharOneButton);
 	window->draw(*this->CharTwoButton);
 
+	if (this->drawMeny)
+	{
+		window->draw(this->MenyOption);
+	}
 	if (this->drawInventory)
 	{
 		window->draw(this->inventoryBackground);
@@ -239,14 +246,14 @@ void UI::openCloseCharacterInventory()
 						nrOfEachItemInventory[i] = nullptr;
 					}
 				}
-				for (int i = 0; i < this->characters[0]->getNrOfItems();i++)
+				for (int i = 0; i < this->characters[1]->getNrOfItems();i++)
 				{
 					sf::Text* text;
 					text = new sf::Text;
 
 					text->setFont(this->fontTwo);
 					text->setCharacterSize(20);
-					text->setString(std::to_string(this->characters[0]->getNrOfAnItem(i)));
+					text->setString(std::to_string(this->characters[1]->getNrOfAnItem(i)));
 					text->setFillColor(sf::Color::Black);
 					this->nrOfEachItemInventory[i] = text;
 				}
@@ -312,14 +319,14 @@ void UI::updateInventory()
 					nrOfEachItemInventory[i] = nullptr;
 				}
 			}
-			for (int i = 0; i < this->characters[0]->getNrOfItems();i++)
+			for (int i = 0; i < this->characters[1]->getNrOfItems();i++)
 			{
 				sf::Text* text;
 				text = new sf::Text;
 
 				text->setFont(this->fontTwo);
 				text->setCharacterSize(20);
-				text->setString(std::to_string(this->characters[0]->getNrOfAnItem(i)));
+				text->setString(std::to_string(this->characters[1]->getNrOfAnItem(i)));
 				text->setFillColor(sf::Color::Black);
 				this->nrOfEachItemInventory[i] = text;
 			}
@@ -469,4 +476,54 @@ void UI::unstuckCamera()
 	//{
 	//	camera->move(0, -5);
 	//}
+}
+
+void UI::displayMeny(ResourceTile* tileToDisplay, const sf::Vector2f& position)
+{
+	if (tileToDisplay->getName() == "Aluminium Deposit")
+	{
+		this->MenyOption.setString("Mine Aluminium");
+	}
+	else if (tileToDisplay->getName() == "Coal Deposit")
+	{
+		this->MenyOption.setString("Mine Coal");
+	}
+	else if (tileToDisplay->getName() == "Iron Deposit")
+	{
+		this->MenyOption.setString("Mine Iron");
+	}
+	else if (tileToDisplay->getName() == "Stone Deposit")
+	{
+		this->MenyOption.setString("Mine Stone");
+	}
+	else if (tileToDisplay->getName() == "Tree")
+	{
+		this->MenyOption.setString("Cut Tree");
+	}
+	else if (tileToDisplay->getName() == "Water")
+	{
+		this->MenyOption.setString("Gather Water");
+	}
+	this->MenyOption.setPosition(position);
+}
+
+void UI::openCloseMeny(bool trigger)
+{
+	this->drawMeny = trigger;
+}
+
+bool UI::getIfMenyDrawn() const
+{
+	return this->drawMeny;
+}
+
+sf::Vector2f UI::getMenyPosition() const
+{
+	return this->MenyOption.getPosition();
+	
+}
+
+sf::FloatRect UI::getMenyBounds() const
+{
+	return this->MenyOption.getGlobalBounds();
 }

@@ -10,8 +10,6 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->tileMap = new TileMap(this->baseImage, &this->resourceHandler);
 	camera = new sf::View(sf::Vector2f(windowWidth/2, windowHeight/2),sf::Vector2f(windowWidth,windowHeight));
 
-	this->itemHandler = new ItemHandler(&this->resourceHandler);
-
 	this->PCOne = new PlayerCharacter(15, &this->resourceHandler, 4, 4);
 	this->PCTwo = new PlayerCharacter(17, &this->resourceHandler, 4, 4);
 	this->PCTwo->setCoordinates(500, 500);
@@ -20,24 +18,10 @@ Game::Game(float windowWidth, float windowHeight) : GameState("Game", windowWidt
 	this->userInterface->addPCToUI(PCOne);
 	this->userInterface->addPCToUI(PCTwo);
 
-	this->PCOne->addItem(this->itemHandler->getItem(1));
-	this->PCOne->addItem(this->itemHandler->getItem(0));
-	this->PCOne->addItem(this->itemHandler->getItem(2));
-	this->PCOne->addItem(this->itemHandler->getItem(3));
-	this->PCOne->addItem(this->itemHandler->getItem(4));
-	this->PCOne->addItem(this->itemHandler->getItem(5));
-	this->PCOne->addItem(this->itemHandler->getItem(7));
-	this->PCOne->addItem(this->itemHandler->getItem(5));
-	this->PCOne->addItem(this->itemHandler->getItem(5));
-
-	this->PCOne->addNrToAnItem(&this->itemHandler->getItem(1), 2);
-	this->PCOne->addNrToAnItem(&this->itemHandler->getItem(3), 6);
-	this->PCOne->addNrToAnItem(&this->itemHandler->getItem(4), 12);
-
-	this->PCOne->equipWeapon(this->itemHandler->getItem(7));
-	this->PCTwo->equipWeapon(this->itemHandler->getItem(7));
-
 	this->Wei = new Melee(18, &this->resourceHandler, 4, 2, "Bad Guy", 1000, 1000);
+
+	this->castPtr = nullptr;
+	this->selectedTile = nullptr;
 }
 
 Game::~Game()
@@ -47,7 +31,6 @@ Game::~Game()
 	delete this->PCTwo;
 	delete this->camera;
 	delete this->userInterface;
-	delete this->itemHandler;
 	delete this->Wei;
 }
 
@@ -155,42 +138,120 @@ void Game::handleEvents()
 				{
 					this->userInterface->moveToCharTwo();
 				}
+				if (this->userInterface->getIfMenyDrawn() && this->userInterface->getMenyBounds().contains(mouseWorldCoordinates))
+				{
+					if (this->PCOne->isSelected())
+					{
+						if (castPtr->getName() == "Aluminium Deposit")
+						{
+							this->PCOne->addItem(Item(0, &this->resourceHandler, "Aluminium Ore", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Coal Deposit")
+						{
+							this->PCOne->addItem(Item(22, &this->resourceHandler, "Coal", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Iron Deposit")
+						{
+							this->PCOne->addItem(Item(2, &this->resourceHandler, "Iron Ore", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Stone Deposit")
+						{
+							this->PCOne->addItem(Item(5, &this->resourceHandler, "Stone Ore", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Tree")
+						{
+							this->PCOne->addItem(Item(24, &this->resourceHandler, "Log", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Water")
+						{
+							this->PCOne->addItem(Item(25, &this->resourceHandler, "Water", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+					}
+					else if (this->PCTwo->isSelected())
+					{
+						if (castPtr->getName() == "Aluminium Deposit")
+						{
+							this->PCTwo->addItem(Item(0, &this->resourceHandler, "Aluminium Ore", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Coal Deposit")
+						{
+							this->PCTwo->addItem(Item(22, &this->resourceHandler, "Coal", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Iron Deposit")
+						{
+							this->PCTwo->addItem(Item(2, &this->resourceHandler, "Iron Ore", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Stone Deposit")
+						{
+							this->PCTwo->addItem(Item(5, &this->resourceHandler, "Stone Ore", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Tree")
+						{
+							this->PCTwo->addItem(Item(24, &this->resourceHandler, "Log", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+						else if (castPtr->getName() == "Water")
+						{
+							this->PCTwo->addItem(Item(25, &this->resourceHandler, "Water", this->castPtr->getResource()));
+							this->userInterface->updateInventory();
+							this->userInterface->openCloseMeny(false);
+							this->castPtr->switchTexture(&this->resourceHandler);
+						}
+					}
+					
+				}
+				else
+				{
+					this->userInterface->openCloseMeny(false);
+				}
 			}
 			if (event.key.code == sf::Mouse::Button::Right)
 			{
-				if (this->PCOne->isSelected())
-				{
-					int xPos = static_cast<int>(this->mouseWorldCoordinates.x);
-					int yPos = static_cast<int>(this->mouseWorldCoordinates.y);
-					TileEntity* selectedTile;
-					ResourceTile* castPtr;
-					if (xPos % 50 == 0)
-					{
-						xPos = xPos / 50;
-					}
-					else
-					{
-						xPos = xPos / 50 + 1;
-					}
-					if (yPos % 50 == 0)
-					{
-						yPos = yPos / 50;
-					}
-					else
-					{
-						yPos = yPos / 50 + 1;
-					}
-					selectedTile = this->tileMap->getTile(xPos, yPos);
-					
-					castPtr = dynamic_cast<ResourceTile*>(selectedTile);
-					if (castPtr != nullptr)
-					{
+				int xPos = static_cast<int>(this->mouseWorldCoordinates.x);
+				int yPos = static_cast<int>(this->mouseWorldCoordinates.y);
 
-					}
-				}
-				else if (this->PCTwo->isSelected())
-				{
+				xPos = xPos / 50;
+				yPos = yPos / 50;
 
+				this->selectedTile = this->tileMap->getTile(xPos, yPos);
+				this->castPtr = dynamic_cast<ResourceTile*>(selectedTile);
+
+				if (castPtr != nullptr && this->castPtr->getIfHasResource())
+				{
+					this->userInterface->displayMeny(castPtr, mouseWorldCoordinates);
+					this->userInterface->openCloseMeny(true);
 				}
 			}
 			break;
@@ -202,16 +263,6 @@ void Game::handleEvents()
 			else if (event.key.code == sf::Keyboard::C)
 			{
 				this->userInterface->openCloseCharacterSkillScreen();
-			}
-			else if (event.key.code == sf::Keyboard::H)
-			{
-				this->PCOne->removeNrFromAnItem(&this->itemHandler->getItem(4), 4);
-				this->userInterface->updateUI();
-			}
-			else if (event.key.code == sf::Keyboard::J)
-			{
-				this->PCOne->removeItem(&this->itemHandler->getItem(1));
-				this->userInterface->updateUI();
 			}
 			break;
 		}

@@ -7,6 +7,7 @@
 #include "PlayerCharacter.h"
 #include "UI.h"
 #include "Melee.h"
+#include "Ranged.h"
 
 class Game : public GameState
 {
@@ -20,7 +21,6 @@ private:
 
 	TileMap* tileMap;
 	ResHandler resourceHandler;
-	ItemHandler* itemHandler;
 
 	PlayerCharacter* PCOne;
 	PlayerCharacter* PCTwo;
@@ -31,6 +31,9 @@ private:
 	UI* userInterface;
 
 	Melee* Wei;
+
+	TileEntity* selectedTile;
+	ResourceTile* castPtr;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

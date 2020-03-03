@@ -27,6 +27,15 @@ ResHandler::ResHandler()
 	this->textures[21].loadFromFile("../Images/AluminiumBarTexture.png");
 	this->textures[22].loadFromFile("../Images/PieceOfCoalTexture.png");
 	this->textures[23].loadFromFile("../Images/StoneBlockTexture.jpg");
+	this->textures[24].loadFromFile("../Images/LogsTexture.jpg");
+	this->textures[25].loadFromFile("../Images/BucketTexture.png");
+	this->textures[26].loadFromFile("../Images/TreeStumpTexture.jpg");
+	this->textures[27].loadFromFile("../Images/BatteryTexture.png");
+	this->textures[28].loadFromFile("../Images/AxeTexture.png");
+	this->textures[29].loadFromFile("../Images/FurnaceTexture.png");
+	this->textures[30].loadFromFile("../Images/PickaxeTexture.png");
+	this->textures[31].loadFromFile("../Images/MacheteTexture.jpg");
+	this->textures[32].loadFromFile("../Images/NailGunTexture.png");
 }
 
 ResHandler::~ResHandler()

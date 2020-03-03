@@ -11,8 +11,6 @@ private:
 	sf::Image mapRef;
 	TileEntity*** arrBackgrounds;
 	float tileSize;
-	//TileEntity* arrResNCharObj[TILEMAPSIZE][TILEMAPSIZE];
-	//TileEntity* arrCharacterObj[TILEMAPSIZE][TILEMAPSIZE];
 
 public:
 	TileMap(sf::Image &tileRef, ResHandler* resourceHandler);

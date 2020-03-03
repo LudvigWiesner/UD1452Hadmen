@@ -3,7 +3,7 @@
 Item::Item() : Clickable()
 {
 	this->name = "";
-	this->nrOfItem = 1;
+	this->nrOfItem = 0;
 	this->damage = 0;
 }
 
@@ -12,6 +12,13 @@ Item::Item(const int index, ResHandler* resourceHandler, std::string name, int n
 	this->name = name;
 	this->nrOfItem = nrOfItem;
 	this->damage = damage;
+}
+
+Item::Item(const Item& otherItem) : Clickable(otherItem)
+{
+	this->name = otherItem.name;
+	this->nrOfItem = otherItem.nrOfItem;
+	this->damage = otherItem.damage;
 }
 
 int Item::getNrOfItem() const

@@ -33,7 +33,6 @@ void UI::updateUIPositions()
 		{
 			yCounter++;
 		}
-		
 	}
 	this->inventoryBackground.setSize(sf::Vector2f(300.0f, 80.0f + static_cast<float>(yOffSet)));
 	this->skillScreenBackground.setPosition(camera->getCenter().x + this->window->getSize().x / 2 - this->skillScreenBackground.getGlobalBounds().width - this->inventoryBackground.getGlobalBounds().width, camera->getCenter().y - this->window->getSize().y / 2 + 20);
@@ -51,6 +50,13 @@ void UI::updateUIPositions()
 	this->HpOne.setPosition(rectShape.getPosition().x + 30, rectShape.getPosition().y - 8);
 	this->HpTwo.setPosition(rectShapeTwo.getPosition().x + 30, rectShapeTwo.getPosition().y - 8);
 
+	yOffSet = 0;
+	for (int i = 0; i < this->nrOfCraftingOptions; i++)
+	{
+		this->craftingMenyOptions[i].setPosition(this->skillScreen.getPosition().x - this->craftingMenyOptions[11].getGlobalBounds().width, this->camera->getCenter().y - this->window->getSize().y / 2 + 20 + yOffSet);
+		yOffSet += 60;
+	}
+	this->craftingMenyBackground.setPosition(this->craftingMenyOptions[0].getPosition());
 }
 
 void UI::expand()
@@ -93,7 +99,6 @@ UI::UI(sf::RenderWindow* window, sf::View* camera, ResHandler* resourceHandler)
 	this->inventoryBackgroundTexture = resourceHandler->getTexture(19);
 	this->inventoryBackground.setTexture(&this->inventoryBackgroundTexture);
 	
-
 	this->inventoryCapacity = 50;
 	this->nrOfItems = 0;
 	this->characterInventory = new Item * [inventoryCapacity] {nullptr};
@@ -131,6 +136,37 @@ UI::UI(sf::RenderWindow* window, sf::View* camera, ResHandler* resourceHandler)
 	this->MenyOption.setFont(this->fontTwo);
 	this->MenyOption.setCharacterSize(30);
 	this->drawMeny = false;
+
+	this->nrOfCraftingOptions = 12;
+	this->displayCraftingMeny = false;
+	this->displayCraftingMenyInfoBox = false;
+	this->craftingMenyOptions = new sf::Text[nrOfCraftingOptions];
+	for (int i = 0; i < this->nrOfCraftingOptions; i++)
+	{
+		this->craftingMenyOptions[i].setFont(this->fontTwo);
+		this->craftingMenyOptions[i].setCharacterSize(30);
+		this->craftingMenyOptions[i].setFillColor(sf::Color::Black);
+	}
+	this->craftingMenyOptions[0].setString("Crafting Meny");
+	this->craftingMenyOptions[1].setString("Pickaxe");
+	this->craftingMenyOptions[2].setString("Axe");
+	this->craftingMenyOptions[3].setString("Bucket");
+	this->craftingMenyOptions[4].setString("Iron Bar");
+	this->craftingMenyOptions[5].setString("Aluminium Bar");
+	this->craftingMenyOptions[6].setString("Stone Block");
+	this->craftingMenyOptions[7].setString("Furnace");
+	this->craftingMenyOptions[8].setString("Water Purifier");
+	this->craftingMenyOptions[9].setString("Nail Gun");
+	this->craftingMenyOptions[10].setString("Machete");
+	this->craftingMenyOptions[11].setString("Electric Machete");
+
+	this->craftingInfoBox.setFont(this->fontTwo);
+	this->craftingInfoBox.setCharacterSize(20);
+	this->craftingInfoBox.setFillColor(sf::Color::Black);
+
+	this->craftingMenyBackgroundTexture = resourceHandler->getTexture(19);
+	this->craftingMenyBackground.setTexture(&this->craftingMenyBackgroundTexture);
+	this->craftingMenyBackground.setSize(sf::Vector2f(this->craftingMenyOptions[11].getGlobalBounds().width, 730));
 }
 
 UI::~UI()
@@ -142,6 +178,7 @@ UI::~UI()
 		delete this->nrOfEachItemInventory[i];
 	}
 	delete[]this->nrOfEachItemInventory;
+	delete[]this->craftingMenyOptions;
 	delete this->CharTwoButton;
 	delete this->CharOneButton;
 }
@@ -188,8 +225,18 @@ void UI::drawUI(sf::RenderWindow* window)
 		window->draw(this->skillScreenBackground);
 		window->draw(this->skillScreen);
 	}
-
-	
+	if (this->displayCraftingMeny)
+	{
+		window->draw(this->craftingMenyBackground);
+		for (int i = 0; i < this->nrOfCraftingOptions; i++)
+		{
+			window->draw(this->craftingMenyOptions[i]);
+		}	
+	}
+	if (this->displayCraftingMenyInfoBox)
+	{
+		window->draw(this->craftingInfoBox);
+	}
 }
 
 void UI::openCloseCharacterInventory()
@@ -258,14 +305,22 @@ void UI::openCloseCharacterInventory()
 					this->nrOfEachItemInventory[i] = text;
 				}
 			}
-			
 		}
 	}
 	else
 	{
 		this->drawInventory = false;
 	}
+}
 
+bool UI::getIfInventoryOpen() const
+{
+	return this->drawInventory;
+}
+
+sf::FloatRect UI::getInventoryBackgroundBounds() const
+{
+	return this->inventoryBackground.getGlobalBounds();
 }
 
 void UI::updateInventory()
@@ -388,6 +443,16 @@ void UI::openCloseCharacterSkillScreen()
 	{
 		this->drawSkillScreen = false;
 	}
+}
+
+bool UI::getIfSkillScreenOpen() const
+{
+	return this->drawSkillScreen;
+}
+
+sf::FloatRect UI::getSkillSreenBackgroundBounds() const
+{
+	return this->skillScreenBackground.getGlobalBounds();
 }
 
 void UI::updateSkillScreen()
@@ -526,4 +591,124 @@ sf::Vector2f UI::getMenyPosition() const
 sf::FloatRect UI::getMenyBounds() const
 {
 	return this->MenyOption.getGlobalBounds();
+}
+
+void UI::openCloseCraftingMeny()
+{
+	if (this->displayCraftingMeny == false)
+	{
+		this->displayCraftingMeny = true;
+	}
+	else
+	{
+		this->displayCraftingMeny = false;
+		this->displayCraftingMenyInfoBox = false;
+	}
+}
+
+bool UI::getIfCraftingMenyOpen()const
+{
+	return this->displayCraftingMeny;
+}
+
+sf::FloatRect UI::getCraftingMenyBounds(const int index)
+{
+	return this->craftingMenyOptions[index].getGlobalBounds();
+}
+
+void UI::displayCraftingInfoBox(const int index)
+{
+	this->displayCraftingMenyInfoBox = true;
+	if (index == 1)
+	{
+		this->craftingInfoBox.setString("2 Logs\n1 Iron Bar");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[1].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[1].getPosition().y);
+	}
+	else if (index == 2)
+	{
+		this->craftingInfoBox.setString("2 Logs\n1 Iron Bar");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[2].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[2].getPosition().y);
+	}
+	else if (index == 3)
+	{
+		this->craftingInfoBox.setString("2 Logs");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[3].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[3].getPosition().y);
+	}
+	else if (index == 4)
+	{
+		this->craftingInfoBox.setString("3 Iron Ore");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[4].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[4].getPosition().y);
+	}
+	else if (index == 5)
+	{
+		this->craftingInfoBox.setString("3 Aluminium Ore");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[5].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[5].getPosition().y);
+	}
+	else if (index == 6)
+	{
+		this->craftingInfoBox.setString("3 Stone Ore");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[6].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[6].getPosition().y);
+	}
+	else if (index == 7)
+	{
+		this->craftingInfoBox.setString("3 Stone Block");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[7].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[7].getPosition().y);
+	}
+	else if (index == 8)
+	{
+		this->craftingInfoBox.setString("1 Iron bar\n3 Aluminium Bar\n1 Battery");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[8].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[8].getPosition().y);
+	}
+	else if (index == 9)
+	{
+		this->craftingInfoBox.setString("2 Iron Bar\n3 Aluminium Bar");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[9].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[9].getPosition().y);
+	}
+	else if (index == 10)
+	{
+		this->craftingInfoBox.setString("3 Iron Bar\n1 Log");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[10].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[10].getPosition().y);
+	}
+	else if (index == 11)
+	{
+		this->craftingInfoBox.setString("1 Machete\n 1 Battery");
+		this->craftingInfoBox.setPosition(this->craftingMenyOptions[11].getPosition().x - this->craftingInfoBox.getGlobalBounds().width - 20, this->craftingMenyOptions[11].getPosition().y);
+	}
+}
+
+void UI::closeCraftingMenyInfoBox()
+{
+	this->displayCraftingMenyInfoBox = false;
+}
+
+sf::FloatRect UI::getCraftingMenyBackgroundBounds() const
+{
+	return this->craftingMenyBackground.getGlobalBounds();
+}
+
+void UI::interactWithInventory(sf::Vector2f mouseClickPosition)
+{
+	int itemSelected = -1;
+	for (int i = 0; i < this->nrOfItems; i++)
+	{
+		if (this->characterInventory[i]->getBounds().contains(mouseClickPosition))
+		{
+			itemSelected = i;
+			i = this->nrOfItems;
+		}
+	}
+	if (itemSelected != -1)
+	{
+		if (this->characterInventory[itemSelected]->getIfWeapon())
+		{
+			if (this->characters[0]->isSelected())
+			{
+				this->characters[0]->equipWeapon(this->characterInventory[itemSelected]);
+			}
+			else if (this->characters[1]->isSelected())
+			{
+				this->characters[1]->equipWeapon(this->characterInventory[itemSelected]);
+			}
+		}
+	}
 }

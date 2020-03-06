@@ -36,6 +36,8 @@ ResHandler::ResHandler()
 	this->textures[30].loadFromFile("../Images/PickaxeTexture.png");
 	this->textures[31].loadFromFile("../Images/MacheteTexture.jpg");
 	this->textures[32].loadFromFile("../Images/NailGunTexture.png");
+	this->textures[33].loadFromFile("../Images/WoodenBucketTexture.png");
+	this->textures[34].loadFromFile("../Images/WaterPurifierTexture.png");
 }
 
 ResHandler::~ResHandler()

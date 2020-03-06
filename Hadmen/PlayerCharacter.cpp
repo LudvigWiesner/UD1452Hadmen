@@ -30,7 +30,6 @@ PlayerCharacter::~PlayerCharacter()
 		delete this->inventory->getAt(i);
 	}
 	delete this->inventory;
-	delete this->equippedWeapon;
 }
 
 void PlayerCharacter::setSelected(const bool set)
@@ -93,6 +92,24 @@ void PlayerCharacter::removeItem(Item* itemToRemove)
 	
 }
 
+void PlayerCharacter::removeItem(const std::string itemName)
+{
+	int index = -1;
+	for (int i = 0; i < this->inventory->length();i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemName)
+		{
+			index = i;
+			i = this->inventory->length();
+		}
+	}
+	if (index != -1)
+	{
+		delete this->inventory->getAt(index);
+		this->inventory->removeAt(index);
+	}
+}
+
 int PlayerCharacter::getNrOfAnItem(Item* itemToCount)
 {
 	int index = -1;
@@ -117,6 +134,27 @@ int PlayerCharacter::getNrOfAnItem(Item* itemToCount)
 int PlayerCharacter::getNrOfAnItem(const int index)
 {
 	return this->inventory->getAt(index)->getNrOfItem();
+}
+
+int PlayerCharacter::getNrOfAnItem(const std::string itemName)
+{
+	int index = -1;
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemName)
+		{
+			index = i;
+			i = this->inventory->length();
+		}
+	}
+	if (index != -1)
+	{
+		return this->inventory->getAt(index)->getNrOfItem();
+	}
+	else
+	{
+		return index;
+	}
 }
 
 int PlayerCharacter::getNrOfItems() const
@@ -152,18 +190,40 @@ void PlayerCharacter::removeNrFromAnItem(Item* itemToRemoveFrom, const int nr)
 	}
 }
 
+void PlayerCharacter::removeNrFromAnItem(const std::string itemName, const int nr)
+{
+	for (int i = 0; i < this->inventory->length(); i++)
+	{
+		if (this->inventory->getAt(i)->getName() == itemName)
+		{
+			this->inventory->getAt(i)->removeNrOfItem(nr);
+			i = this->inventory->length();
+			//if (this->inventory->getAt(i)->getNrOfItem() >= nr)
+			//{
+			//	delete this->inventory->getAt(i); 
+			//	this->inventory->removeAt(i);
+			//}
+			//else
+			//{
+			//	this->inventory->getAt(i)->removeNrOfItem(nr);
+			//}
+		}
+	}
+}
+
 int PlayerCharacter::getEquippedWeaponDamage() const
 {
 	return this->equippedWeapon->getDamage();
 }
 
-void PlayerCharacter::equipWeapon(const Item itemToEquip)
+void PlayerCharacter::equipWeapon(Item* itemToEquip)
 {
-	if (this->equippedWeapon != nullptr)
-	{
-		delete this->equippedWeapon;
-	}
-	this->equippedWeapon = new Item(itemToEquip);
+	this->equippedWeapon = itemToEquip;
+}
+
+Item* PlayerCharacter::getEquippedWeapon() const
+{
+	return this->equippedWeapon;
 }
 
 void PlayerCharacter::addExp(std::string attribute, float expToAdd)
@@ -180,27 +240,63 @@ void PlayerCharacter::addExp(std::string attribute, float expToAdd)
 	}
 	else if (attribute == "Ranged")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->ranged += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 	else if (attribute == "Woodcutting")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->woodcutting += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 	else if (attribute == "Mining")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->mining += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 	else if (attribute == "Hunting")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->hunting += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 	else if (attribute == "Engineering")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->engineering += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 	else if (attribute == "Construction")
 	{
+		int previousExp = static_cast<int>(this->melee);
 		this->construction += expToAdd;
+		int afterExp = static_cast<int>(this->melee);
+		if (previousExp < afterExp)
+		{
+			this->addBaseExp();
+		}
 	}
 }
 

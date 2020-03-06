@@ -15,7 +15,7 @@ TileMap::TileMap(sf::Image& tileRef, ResHandler* resourceHandler)
 	{
 		for (int X = 0; X < TILEMAPSIZE; X++)
 		{
-			if (this->mapRef.getPixel(X, Y) == sf::Color::Color(146, 146, 146))
+			if (this->mapRef.getPixel(X, Y) == sf::Color::Color(204, 204, 204))
 			{
 				arrBackgrounds[X][Y] = new ResourceTile(0, resourceHandler, "Aluminium Deposit", X * 50.0f, Y * 50.0f);
 			}
@@ -27,19 +27,23 @@ TileMap::TileMap(sf::Image& tileRef, ResHandler* resourceHandler)
 			{
 				arrBackgrounds[X][Y] = new ResourceTile(8, resourceHandler, "Water", X * 50.0f, Y * 50.0f);
 			}
-			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(19, 19, 19))
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(153, 102, 102))
 			{
 				arrBackgrounds[X][Y] = new ResourceTile(2, resourceHandler, "Iron Deposit", X * 50.0f, Y * 50.0f);
 			}
-			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color())
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(0, 102, 0))
 			{
-				arrBackgrounds[X][Y] = new ResourceTile(6, resourceHandler, "Tree", X * 50.0f, Y * 50.0f); //lägg till
+				arrBackgrounds[X][Y] = new ResourceTile(6, resourceHandler, "Tree", X * 50.0f, Y * 50.0f);
 			}
-			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color())
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(196, 196, 196))
 			{
-				arrBackgrounds[X][Y] = new ResourceTile(5, resourceHandler, "Stone Deposit", X * 50.0f, Y * 50.0f); //lägg till
+				arrBackgrounds[X][Y] = new ResourceTile(5, resourceHandler, "Stone Deposit", X * 50.0f, Y * 50.0f);
 			}
-			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(55, 193, 25)) // Wall
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(204, 153, 0)) // Dirt
+			{
+				arrBackgrounds[X][Y] = new TileEntity(13, resourceHandler, X * 50.0f, Y * 50.0f);
+			}
+			else if (this->mapRef.getPixel(X, Y) == sf::Color::Color(153, 0, 0)) // Wall
 			{
 				arrBackgrounds[X][Y] = new TileEntity(7, resourceHandler, X * 50.0f, Y * 50.0f);
 			}

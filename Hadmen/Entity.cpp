@@ -64,7 +64,7 @@ void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
 		{
 			this->vertDir = UP;
 		}
-		else if (coordinates.y < this->getPosition().y)
+		else if (coordinates.y < this->getPosition().y + this->getBounds().height)
 		{
 			this->vertDir = DOWN;
 		}
@@ -72,7 +72,7 @@ void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
 		{
 			this->horDir = RIGHT;
 		}
-		else if (coordinates.x < this->getPosition().x)
+		else if (coordinates.x < this->getPosition().x + this->getBounds().width)
 		{
 			this->horDir = LEFT;
 		}

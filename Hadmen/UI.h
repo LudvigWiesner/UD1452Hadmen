@@ -48,6 +48,14 @@ private:
 	sf::Text MenyOption;
 	bool drawMeny;
 
+	sf::Text* craftingMenyOptions;
+	int nrOfCraftingOptions;
+	bool displayCraftingMeny;
+	sf::Text craftingInfoBox;
+	bool displayCraftingMenyInfoBox;
+	sf::RectangleShape craftingMenyBackground;
+	sf::Texture craftingMenyBackgroundTexture;
+
 	void updateCharacterGUI();
 	void updateUIPositions();
 	void expand();
@@ -60,7 +68,11 @@ public:
 	void drawUI(sf::RenderWindow* window);
 
 	void openCloseCharacterInventory();
+	bool getIfInventoryOpen()const;
+	sf::FloatRect getInventoryBackgroundBounds()const;
 	void openCloseCharacterSkillScreen();
+	bool getIfSkillScreenOpen()const;
+	sf::FloatRect getSkillSreenBackgroundBounds()const;
 	void updateSkillScreen();
 	void updateInventory();
 
@@ -76,5 +88,13 @@ public:
 	sf::Vector2f getMenyPosition()const;
 	sf::FloatRect getMenyBounds()const;
 
+	void openCloseCraftingMeny();
+	bool getIfCraftingMenyOpen()const;
+	sf::FloatRect getCraftingMenyBounds(const int index);
+	void displayCraftingInfoBox(const int index);
+	void closeCraftingMenyInfoBox();
+	sf::FloatRect getCraftingMenyBackgroundBounds()const;
+
+	void interactWithInventory(sf::Vector2f mouseClickPosition);
 };
 #endif // !UI_H

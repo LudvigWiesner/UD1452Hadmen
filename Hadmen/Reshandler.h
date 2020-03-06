@@ -7,7 +7,7 @@ class ResHandler
 {
 private:
 	sf::Texture* textures;
-	int texturesSize = 33;
+	int texturesSize = 35;
 
 public:
 	ResHandler();

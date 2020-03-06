@@ -27,7 +27,6 @@ private:
 	float cooking;
 	float construction;
 
-	void addExp(std::string attribute, float expToAdd);
 	void addBaseExp();
 	void increaseBaseStamina(const int stamina);
 public:
@@ -40,17 +39,22 @@ public:
 
 	void addItem(const Item itemToAdd);
 	void removeItem(Item* itemToRemove);
+	void removeItem(const std::string itemName);
 	int getNrOfAnItem(Item* itemToCount);
 	int getNrOfAnItem(const int index);
+	int getNrOfAnItem(const std::string itemName);
 	int getNrOfItems()const;
 	void getAllItems(Item* arr[]);
 
 	void addNrToAnItem(Item* itemToAddTo, const int nr);
 	void removeNrFromAnItem(Item* itemToRemoveFrom, const int nr);
+	void removeNrFromAnItem(const std::string itemName, const int nr);
 
 	int getEquippedWeaponDamage()const;
-	void equipWeapon(const Item itemToEquip);
+	void equipWeapon(Item* itemToEquip);
+	Item* getEquippedWeapon()const;
 	
+	void addExp(std::string attribute, float expToAdd);
 	int getBaseLevel()const;
 	int getMeleeLevel()const;
 	int getRangedLevel()const;

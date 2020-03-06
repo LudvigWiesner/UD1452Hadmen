@@ -2,7 +2,7 @@
 
 ResHandler::ResHandler()
 {
-	this->textures = new sf::Texture[this->size];
+	this->textures = new sf::Texture[texturesSize];
 	this->textures[0].loadFromFile("../Images/AluminiumTexture.png");
 	this->textures[1].loadFromFile("../Images/CoalTexture.png");
 	this->textures[2].loadFromFile("../Images/IronTexture.png");
@@ -23,6 +23,16 @@ ResHandler::ResHandler()
 	this->textures[17].loadFromFile("../Images/CharacterSpriteSheet2.png");
 	this->textures[18].loadFromFile("../Images/smokeSheet.png");
 	this->textures[19].loadFromFile("../Images/InventoryBackground.jpg");
+	this->textures[20].loadFromFile("../Images/IronBarTexture.png");
+	this->textures[21].loadFromFile("../Images/AluminiumBarTexture.png");
+	this->textures[22].loadFromFile("../Images/PieceOfCoalTexture.png");
+	this->textures[23].loadFromFile("../Images/StoneBlockTexture.jpg");
+	this->textures[24].loadFromFile("../Images/CharOne.png");
+	this->textures[25].loadFromFile("../Images/CharTwo.png");
+	this->textures[26].loadFromFile("../Images/furnace.png");
+	this->textures[27].loadFromFile("../Images/waterPurifer.png");
+	this->textures[28].loadFromFile("../Images/stonebrick.png");
+	this->textures[29].loadFromFile("../Images/furnaceOff.png");
 }
 
 ResHandler::~ResHandler()
@@ -34,3 +44,5 @@ sf::Texture ResHandler::getTexture(const int index)
 {
 	return this->textures[index];
 }
+
+

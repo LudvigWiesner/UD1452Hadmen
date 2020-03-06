@@ -4,18 +4,20 @@
 #include "SFML/Graphics.hpp"
 #include "PlayerCharacter.h"
 #include "Reshandler.h"
-#include <vector>
+
 
 class UI
 {
 private:
 	sf::Font fontOne;
+	sf::Font fontTwo;
 
 	sf::Text characterGUI;
-	Item* characterInventory;
+	Item** characterInventory;
+	sf::Text** nrOfEachItemInventory;
 	int inventoryCapacity;
 	int nrOfItems;
-
+	
 	sf::RenderWindow* window;
 	sf::View* camera;
 
@@ -27,21 +29,28 @@ private:
 	sf::Texture inventoryBackgroundTexture;
 	bool drawInventory;
 
+	bool drawSkillScreen;
+	sf::RectangleShape skillScreenBackground;
+	sf::Texture skillScreenBackgroundTexture;
+	sf::Text skillScreen;
+
 	sf::RectangleShape rectShape;
 	sf::RectangleShape rectShapeTwo;
-
 	sf::RectangleShape hpOneBorder;
 	sf::RectangleShape hpTwoBorder;
-
-	sf::RectangleShape CharOneButton;
-	sf::RectangleShape CharTwoButton;
-
 	sf::Text HpOne;
 	sf::Text HpTwo;
 
+	sf::RectangleShape staminaBarOne;
+	sf::RectangleShape staminaBarTwo;
+	sf::Text staminaOne;
+	sf::Text staminaTwo;
+
+	Clickable* CharOneButton;
+	Clickable* CharTwoButton;
+
 	void updateCharacterGUI();
 	void updateUIPositions();
-	
 	void expand();
 public:
 	UI(sf::RenderWindow* window, sf::View* camera, ResHandler* resourceHandler);
@@ -49,12 +58,20 @@ public:
 
 	void addPCToUI(PlayerCharacter* PC);
 	void updateUI();
-
-	void moveToProfile();
-	void unstuckCamera();
-
 	void drawUI(sf::RenderWindow* window);
+
 	void openCloseCharacterInventory();
+	void openCloseCharacterSkillScreen();
+	void updateSkillScreen();
+	void updateInventory();
+
+	void moveToCharOne();
+	void moveToCharTwo();
+	Clickable* getButtonOne();
+	Clickable* getButtonTwo();
+	bool buttonOneContainsMouse(const sf::Vector2f &mousePos);
+	bool buttonTwoContainsMouse(const sf::Vector2f &mousePos);
+	void unstuckCamera();
 
 
 };

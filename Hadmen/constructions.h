@@ -5,24 +5,21 @@
 class Construction: public TileEntity
 {
 private:
-	int sizeX;
-	int sizeY;
-	float yPos;
-	float xPos;
-
-	PlayerCharacter* pc;
+	bool beenPlaced;
 
 protected:
 	void changePosValue(float xPos, float yPos);
 
 public:
-	Construction(int sizeX, int sizeY, float xPos, float yPos, const int index, ResHandler* resourceHandler);
+	Construction(const int index, ResHandler* resourceHandler);
 
-
+	bool isSamePlace(PlayerCharacter& pc, Construction& otherConstruct, sf::RenderWindow &window, Construction &self);
+	bool hasBeenPlaced() const;
+	void changePlacedValue(int value);
 	sf::Vector2f checkPlayerPos(PlayerCharacter* player);
 
-	bool playerInRange();
+	bool playerInRange(PlayerCharacter* pc);
 	sf::Vector2f getConstructionPosition();
-	virtual void build(PlayerCharacter* player) = 0;
+	void build(PlayerCharacter* player);
 
 };

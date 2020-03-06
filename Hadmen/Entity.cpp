@@ -13,6 +13,7 @@ Entity::Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int n
 	this->MaxHP = 100;
 	this->currentHP = 100;
 	this->evasion = 0;
+	this->direction = 0;
 }
 
 Entity::Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int nrOfColumns, int evasion, float speed) : Clickable(index, resourceHandler)
@@ -28,29 +29,29 @@ Entity::Entity(const int index, ResHandler* resourceHandler, int nrOfRows, int n
 	this->MaxHP = 100;
 	this->currentHP = 100;
 	this->setEvasion(evasion);
+	this->direction = 0;
 }
 
 void Entity::moveEntityTo(sf::Vector2f coordinates)
 {
 	this->horDir = NO;
 	this->vertDir = NO;
-	if (coordinates.y > this->getPosition().y + this->getBounds().height)
+	if (coordinates.y > this->getPosition().y + this->getBounds().height / 2)
 	{
 		this->vertDir = UP;
 	}
-	else if (coordinates.y < this->getPosition().y + this->getBounds().height)
+	else if (coordinates.y < this->getPosition().y)
 	{
 		this->vertDir = DOWN;
 	}
-	if (coordinates.x > this->getPosition().x + this->getBounds().width)
+	if (coordinates.x > this->getPosition().x + this->getBounds().width / 2)
 	{
 		this->horDir = RIGHT;
 	}
-	else if (coordinates.x < this->getPosition().x + this->getBounds().width)
+	else if (coordinates.x < this->getPosition().x)
 	{
 		this->horDir = LEFT;
 	}
-
 	this->moveSprite(this->horDir, this->vertDir, this->speed);
 	this->switchSprite();
 }
@@ -65,7 +66,7 @@ void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
 		{
 			this->vertDir = UP;
 		}
-		else if (coordinates.y < this->getPosition().y + this->getBounds().height)
+		else if (coordinates.y < this->getPosition().y)
 		{
 			this->vertDir = DOWN;
 		}
@@ -73,7 +74,7 @@ void Entity::moveEntityTo(sf::Vector2f coordinates, const int row)
 		{
 			this->horDir = RIGHT;
 		}
-		else if (coordinates.x < this->getPosition().x + this->getBounds().width)
+		else if (coordinates.x < this->getPosition().x)
 		{
 			this->horDir = LEFT;
 		}
@@ -91,18 +92,22 @@ void Entity::switchSprite()
 	if (this->vertDir == UP)
 	{
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::DOWN);
+		this->direction = 1;
 	}
 	else if (this->vertDir == DOWN)
 	{
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::UP);
+		this->direction = 3;
 	}
 	if (this->horDir == LEFT && vertDir == NO)
 	{
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::LEFT);
+		this->direction = 2;
 	}
 	else if (this->horDir == RIGHT && vertDir == NO)
 	{
 		this->intRect.top = this->intRect.height * (int)(MoveDirections::RIGHT);
+		this->direction = 4;
 	}
 
 	this->timeCounter = (this->timeCounter + 1) % this->updateTime;
@@ -141,10 +146,7 @@ void Entity::takeDamage(const int damage)
 
 void Entity::makeAttack(Entity& otherEntity, const int damage)
 {
-	if (this->getBounds().intersects(otherEntity.getBounds()))
-	{
-		otherEntity.takeDamage(damage);
-	}
+	otherEntity.takeDamage(damage);
 }
 
 void Entity::setEvasion(const int evasion)
@@ -173,6 +175,10 @@ int Entity::getMaxHP() const
 int Entity::getCurrentHP() const
 {
 	return this->currentHP;
+}
+int Entity::getDirection() const
+{
+	return direction;
 }
 
 

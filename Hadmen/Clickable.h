@@ -11,13 +11,12 @@ private:
 	sf::Sprite sprite;
 	sf::Texture texture;
 
-	bool m_pressed;
-	bool m_mouseHeld;
 	bool m_active;
 
 	bool isInside(const sf::Vector2f &mousePosF)const;
 protected:
 	void moveSprite(const int horDir, const int vertDir, float speed);
+	void updateSprite(int id, ResHandler* resourceHandler);
 public:
 	void reset();
 	Clickable();

@@ -22,6 +22,8 @@ private:
 	int horDir;
 	int vertDir;
 
+	int direction;
+
 	void switchSprite();
 	void switchSprite(const int row);
 
@@ -45,6 +47,8 @@ public:
 
 	int getMaxHP()const;
 	int getCurrentHP()const;
+
+	int getDirection() const;
 	
 };
 #endif // !ENTITY_H

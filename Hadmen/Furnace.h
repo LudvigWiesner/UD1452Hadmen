@@ -4,14 +4,19 @@
 class Furnace : public Construction
 {
 private:
-	bool beenPlaced;
+	int coal;
+	int counter;
+	int updateTime;
+protected:
+
 
 public:
-	Furnace(int sizeX, int sizeY, float xPos, float yPos, const int index, ResHandler* resourceHandler);
+	Furnace(const int index, ResHandler* resourceHandler);
 
-	bool isPlaced() const;
+	void addCoal(PlayerCharacter* pc);
 
-	// Inherited via Construction
-	virtual void build(PlayerCharacter* player) override;
+	void proccessCoal();
+
+	void updateFurnace(ResHandler* resourceHandler);
 
 };

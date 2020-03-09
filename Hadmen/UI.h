@@ -3,8 +3,8 @@
 #define UI_H
 #include "SFML/Graphics.hpp"
 #include "PlayerCharacter.h"
+#include "Melee.h"
 #include "Reshandler.h"
-#include "ResourceTile.h"
 
 
 class UI
@@ -42,19 +42,18 @@ private:
 	sf::Text HpOne;
 	sf::Text HpTwo;
 
+	sf::RectangleShape staminaBarOne;
+	sf::RectangleShape staminaBarTwo;
+	sf::Text staminaOne;
+	sf::Text staminaTwo;
+
 	Clickable* CharOneButton;
 	Clickable* CharTwoButton;
 
-	sf::Text MenyOption;
-	bool drawMeny;
-
-	sf::Text* craftingMenyOptions;
-	int nrOfCraftingOptions;
-	bool displayCraftingMeny;
-	sf::Text craftingInfoBox;
-	bool displayCraftingMenyInfoBox;
-	sf::RectangleShape craftingMenyBackground;
-	sf::Texture craftingMenyBackgroundTexture;
+	sf::RectangleShape enemyHP[10];
+	Melee** meleeEnemies;
+	int meleeCapacity;
+	int nrOfMelees;
 
 	void updateCharacterGUI();
 	void updateUIPositions();
@@ -64,15 +63,12 @@ public:
 	~UI();
 
 	void addPCToUI(PlayerCharacter* PC);
+	void addEnemyToUI(Melee* melee);
 	void updateUI();
 	void drawUI(sf::RenderWindow* window);
 
 	void openCloseCharacterInventory();
-	bool getIfInventoryOpen()const;
-	sf::FloatRect getInventoryBackgroundBounds()const;
 	void openCloseCharacterSkillScreen();
-	bool getIfSkillScreenOpen()const;
-	sf::FloatRect getSkillSreenBackgroundBounds()const;
 	void updateSkillScreen();
 	void updateInventory();
 
@@ -80,21 +76,10 @@ public:
 	void moveToCharTwo();
 	Clickable* getButtonOne();
 	Clickable* getButtonTwo();
+	bool buttonOneContainsMouse(const sf::Vector2f &mousePos);
+	bool buttonTwoContainsMouse(const sf::Vector2f &mousePos);
 	void unstuckCamera();
 
-	void displayMeny(ResourceTile* tileToDisplay, const sf::Vector2f &position);
-	void openCloseMeny(bool trigger);
-	bool getIfMenyDrawn()const;
-	sf::Vector2f getMenyPosition()const;
-	sf::FloatRect getMenyBounds()const;
 
-	void openCloseCraftingMeny();
-	bool getIfCraftingMenyOpen()const;
-	sf::FloatRect getCraftingMenyBounds(const int index);
-	void displayCraftingInfoBox(const int index);
-	void closeCraftingMenyInfoBox();
-	sf::FloatRect getCraftingMenyBackgroundBounds()const;
-
-	void interactWithInventory(sf::Vector2f mouseClickPosition);
 };
 #endif // !UI_H

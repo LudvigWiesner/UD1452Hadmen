@@ -10,7 +10,6 @@ Clickable::Clickable(const int index, ResHandler* resourceHandler)
 	this->m_active = false;
 	this->texture = resourceHandler->getTexture(index);
 	this->sprite.setTexture(this->texture);
-	this->sprite.setOrigin(this->sprite.getLocalBounds().left / 2, this->sprite.getLocalBounds().top / 2);
 }
 
 Clickable::Clickable(const int index, ResHandler* resourceHandler, float x, float y)
@@ -19,15 +18,6 @@ Clickable::Clickable(const int index, ResHandler* resourceHandler, float x, floa
 	this->texture = resourceHandler->getTexture(index);
 	this->sprite.setTexture(this->texture);
 	this->sprite.setPosition(x, y);
-	this->sprite.setOrigin(this->sprite.getLocalBounds().left / 2, this->sprite.getLocalBounds().top / 2);
-}
-
-Clickable::Clickable(const Clickable &otherClickable)
-{
-	this->m_active = otherClickable.m_active;
-	this->texture = otherClickable.texture;
-	this->sprite.setTexture(this->texture);
-	this->sprite.setPosition(otherClickable.getPosition());
 }
 
 sf::FloatRect Clickable::getBounds()const
@@ -74,6 +64,14 @@ void Clickable::moveSprite(const int horDir, const int vertDir, float speed)
 	this->sprite.move(horDir * speed, vertDir * speed);
 }
 
+void Clickable::updateSprite(int id, ResHandler* resourceHandler)
+{
+	this->texture = resourceHandler->getTexture(id);
+	this->sprite.setTexture(this->texture);
+}
+
+
+
 sf::Vector2f Clickable::getPosition() const
 {
 	return this->sprite.getPosition();
@@ -87,12 +85,6 @@ sf::Vector2u Clickable::getTextureSize() const
 void Clickable::setSpriteScale(float x, float y)
 {
 	this->sprite.setScale(x, y);
-}
-
-void Clickable::setTexture(const int index, ResHandler* resourceHandler)
-{
-	this->texture = resourceHandler->getTexture(index);
-	this->sprite.setTexture(this->texture);
 }
 
 void Clickable::draw(sf::RenderTarget& target, sf::RenderStates states) const

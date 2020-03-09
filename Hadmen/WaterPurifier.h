@@ -1,15 +1,27 @@
 #pragma once
-#include "Construction.h"
+#include "constructions.h"
+#include "TileMap.h"
 
 class WaterPurifier : public Construction
 {
 private:
-	bool beenPlaced;
+	int xPos;
+	int yPos;
+	int range;
+	int topLeftX;
+	int topRightX;
+	int bottomLeftX;
+	int bottomRightX;
+	int topLeftY;
+	int topRightY;
+	int bottomLeftY;
+	int bottomRightY;
+	
 public:
-	WaterPurifier(int sizeX, int sizeY, float xPos, float yPos, const int index, ResHandler* resourceHandler);
+	WaterPurifier(const int index, ResHandler* resourceHandler);
 
-	bool isPlaced() const;
+	void setPositions();
 
-	// Inherited via Construction
-	virtual void build(PlayerCharacter* player) override;
+	void checkIfPoisioned();
+
 };

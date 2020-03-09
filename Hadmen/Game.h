@@ -7,7 +7,10 @@
 #include "PlayerCharacter.h"
 #include "UI.h"
 #include "Melee.h"
-#include "Ranged.h"
+#include "Furnace.h"
+#include "WaterPurifier.h"
+#include "StoneBrick.h"
+#include "Sound.h"
 
 class Game : public GameState
 {
@@ -21,6 +24,7 @@ private:
 
 	TileMap* tileMap;
 	ResHandler resourceHandler;
+	ItemHandler* itemHandler;
 
 	PlayerCharacter* PCOne;
 	PlayerCharacter* PCTwo;
@@ -28,12 +32,19 @@ private:
 	sf::Vector2f mouseWorldCoordinates;
 	sf::Vector2f playerGoToCoordinates;
 
+	Furnace* furnace;
+	WaterPurifier* waterPlant;
+	StoneBrick* stonebrick[10];
+
+	SoundEffect furnaceSound;
+
+	int maxStoneBricks;
+	int currentBricks;
+
+
 	UI* userInterface;
 
 	Melee* Wei;
-
-	TileEntity* selectedTile;
-	ResourceTile* castPtr;
 public:
 	Game(float windowWidth, float windowHeight);
 	virtual ~Game();

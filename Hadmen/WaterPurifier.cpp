@@ -1,34 +1,47 @@
 #include "WaterPurifier.h"
 
-WaterPurifier::WaterPurifier(int sizeX, int sizeY, float xPos, float yPos, const int index, ResHandler* resourceHandler)
-	:Construction(sizeX, sizeY, xPos, yPos, index, resourceHandler)
+WaterPurifier::WaterPurifier( const int index, ResHandler* resourceHandler)
+	:Construction(index, resourceHandler)
 {
-	this->beenPlaced = false;
+	this->range = 200;
+	this->xPos = 0;
+	this->yPos = 0;
+	this->topLeftX = 0;
+	this->topRightX = 0;
+	this->bottomLeftX = 0;
+	this->bottomRightX = 0;
+	this->topLeftY = 0;
+	this->topRightY = 0;
+	this->bottomLeftY = 0;
+	this->bottomRightY = 0;
 }
 
-bool WaterPurifier::isPlaced() const
+void WaterPurifier::setPositions()
 {
-	return beenPlaced;
+	this->xPos = getPosition().x;
+	this->yPos = getPosition().y;
+	this->topLeftX = xPos - 100;
+	this->topLeftY = yPos - 100;
+	this->topRightX = xPos + 100;
+	this->topRightY = yPos - 100;
+	this->bottomLeftX = xPos - 100;
+	this->bottomLeftY = yPos + 100;
+	this->bottomRightX = xPos + 100;
+	this->bottomRightY = yPos + 100;
 }
 
-void WaterPurifier::build(PlayerCharacter* player)
+void WaterPurifier::checkIfPoisioned()
 {
-	//check if its been placed
-	if (beenPlaced == false)
+	for (int y = topLeftY; y < bottomLeftY; y++)
 	{
+		for (int x = topLeftX; x < topRightX; x++)
+		{
+			if ()
+			{
 
-		//check for player pos (+ check for player facing direction?)
-
-		float xPlayerPos = checkPlayerPos(player).x;
-		float yPlayerPos = checkPlayerPos(player).y;
-
-		//set furnace pos relevant to player pos + extra
-
-		changePosValue(xPlayerPos - 80, yPlayerPos - 80);
-
-		//set been placed to true
-
-		beenPlaced = true;
-
+			}
+		}
 	}
 }
+
+

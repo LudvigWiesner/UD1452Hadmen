@@ -1,36 +1,54 @@
 #include "Furnace.h"
+#include <iostream>
 
-Furnace::Furnace(int sizeX, int sizeY, float xPos, float yPos, const int index, ResHandler* resourceHandler)
-	:Construction(sizeX, sizeY,xPos, yPos, index, resourceHandler)
+
+Furnace::Furnace(const int index, ResHandler* resourceHandler)
+	:Construction(index, resourceHandler)
 {
-	this->beenPlaced = false;
+	this->coal = 0;
+	this->updateTime = 600;
+	this->counter = 0;
 }
 
-bool Furnace::isPlaced() const
+void Furnace::addCoal(PlayerCharacter* pc)
 {
-	return beenPlaced;
-}
-
-void Furnace::build(PlayerCharacter* player)
-{
-	//check if its been placed
-	if (beenPlaced == false)
+	if (playerInRange(pc) == true)
 	{
-
-		//check for player pos (+ check for player facing direction?)
-
-		int xPlayerPos = checkPlayerPos(player).x;
-		int yPlayerPos = checkPlayerPos(player).y;
-
-		//set furnace pos relevant to player pos + extra
-
-		changePosValue(xPlayerPos - 50, yPlayerPos - 50);
-
-		//set been placed to true
-
-		beenPlaced = true;
-
+		this->coal += 5;
+		std::cout << "added coal" << std::endl;
 	}
+}
+
+void Furnace::proccessCoal()
+{
+	if (this->coal > 0)
+	{
+		this->counter++;
+		std::cout << "Proccessing" << std::endl;
+		if (counter == updateTime)
+		{
+			std::cout << "One coal got used" << std::endl;
+			this->coal -= 1;
+			this->counter = 0;
+		}
+	}
+}
 
 
+
+void Furnace::updateFurnace(ResHandler* resourceHandler)
+{
+	if (this->coal > 0)
+	{
+		this->updateSprite(26, resourceHandler);
+	}
+	if (this->coal == 0)
+	{
+		this->updateSprite(29, resourceHandler);
+	}
+}
+
+int Furnace::getCoalAmount() const
+{
+	return this->coal;
 }

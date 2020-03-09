@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Resources">
+      <UniqueIdentifier>{3a8ebe3d-6d14-4259-8a65-95176227a8ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\List">
+      <UniqueIdentifier>{b775a168-568b-4b3c-9e9e-67485a7877ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tile &amp; Tilemap">
+      <UniqueIdentifier>{d23ade34-26ea-4408-9882-885022e6584d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameStates">
+      <UniqueIdentifier>{93b97156-2044-47ae-996b-520b302de7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceHandler">
+      <UniqueIdentifier>{214c97ab-82f9-4324-8d18-6323783702d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Clickable">
+      <UniqueIdentifier>{634b2528-bb8d-438e-ab5a-acb825118516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity &amp; Characters">
+      <UniqueIdentifier>{b7e924cf-f946-4b2b-bdff-244dc5b1da99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Material">
+      <UniqueIdentifier>{ada111b8-2af6-4246-937f-c17a3df7e22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity &amp; Characters\Enemies">
+      <UniqueIdentifier>{9b70c745-2894-41ba-9843-6926fcb995bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{c5787f35-143d-4526-b6dd-227371d64a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sounds">
+      <UniqueIdentifier>{1e3beaa7-dc51-4b60-8e1e-eb2f624944b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Constructions">
+      <UniqueIdentifier>{8efb0e22-145e-40da-aacf-66798ab0c531}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TileEntity.cpp">
+      <Filter>Source Files\Tile &amp; Tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceTile.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Source Files\Tile &amp; Tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="startMeny.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Reshandler.cpp">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Clickable.cpp">
+      <Filter>Source Files\Clickable</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemHandler.cpp">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee.cpp">
+      <Filter>Source Files\Entity &amp; Characters\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Furnace.cpp">
+      <Filter>Source Files\Constructions</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterPurifier.cpp">
+      <Filter>Source Files\Constructions</Filter>
+    </ClCompile>
+    <ClCompile Include="StoneBrick.cpp">
+      <Filter>Source Files\Constructions</Filter>
+    </ClCompile>
+    <ClCompile Include="constructions.cpp">
+      <Filter>Source Files\Constructions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ResourceTile.h">
+      <Filter>Source Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TileEntity.h">
+      <Filter>Source Files\Tile &amp; Tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Source Files\List</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Source Files\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Source Files\Tile &amp; Tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="startMeny.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Source Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Reshandler.h">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Clickable.h">
+      <Filter>Source Files\Clickable</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemHandler.h">
+      <Filter>Source Files\ResourceHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Melee.h">
+      <Filter>Source Files\Entity &amp; Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Music.h">
+      <Filter>Source Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Source Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Furnace.h">
+      <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterPurifier.h">
+      <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneBrick.h">
+      <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="constructions.h">
+      <Filter>Source Files\Constructions</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveDirections.h">
+      <Filter>Source Files\Entity &amp; Characters</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
